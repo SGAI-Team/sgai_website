@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="45%" stop-color="#162033"/>
+      <stop offset="70%" stop-color="#1a1c2e"/>
+      <stop offset="100%" stop-color="#0a0e1a"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="18%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#C87533" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#C87533" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#C87533" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolGlow" cx="85%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="terrace1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2540"/>
+      <stop offset="100%" stop-color="#0c1424"/>
+    </linearGradient>
+    <linearGradient id="terrace2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#25304a"/>
+      <stop offset="100%" stop-color="#121a2e"/>
+    </linearGradient>
+    <linearGradient id="copperVein" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#C87533" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#E8A460" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#C87533" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1628" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="dust" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="0.3" fill="#ffffff" fill-opacity="0.03"/>
+    </pattern>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#sunGlow)"/>
+  <rect width="1920" height="1080" fill="url(#coolGlow)"/>
+
+  <g opacity="0.55">
+    <path d="M 0 560 L 350 530 L 720 555 L 1100 520 L 1500 545 L 1920 510 L 1920 600 L 0 600 Z" fill="#131d33" opacity="0.5"/>
+    <path d="M 0 620 L 280 590 L 620 615 L 960 585 L 1340 610 L 1700 580 L 1920 605 L 1920 680 L 0 680 Z" fill="#1a2540" opacity="0.6"/>
+  </g>
+
+  <g>
+    <path d="M 0 720 L 180 700 L 420 712 L 680 698 L 960 710 L 1260 697 L 1560 708 L 1920 695 L 1920 760 L 0 760 Z" fill="url(#terrace2)"/>
+    <path d="M 0 760 L 1920 760 L 1920 820 L 0 820 Z" fill="#0c1424" opacity="0.4"/>
+  </g>
+
+  <g>
+    <path d="M 0 810 L 240 795 L 520 810 L 820 793 L 1140 810 L 1460 795 L 1780 808 L 1920 798 L 1920 880 L 0 880 Z" fill="url(#terrace1)"/>
+    <path d="M 0 878 L 1920 878 L 1920 920 L 0 920 Z" fill="#0a0f1c" opacity="0.6"/>
+  </g>
+
+  <g>
+    <path d="M 0 910 L 300 895 L 640 915 L 980 895 L 1320 915 L 1660 895 L 1920 912 L 1920 1000 L 0 1000 Z" fill="url(#terrace2)" opacity="0.95"/>
+    <path d="M 0 998 L 1920 998 L 1920 1040 L 0 1040 Z" fill="#080c18"/>
+  </g>
+
+  <g opacity="0.7">
+    <rect x="0" y="1000" width="1920" height="80" fill="#060912"/>
+  </g>
+
+  <g opacity="0.45" stroke="#C87533" stroke-width="0.8" fill="none">
+    <path d="M -50 712 C 300 705, 620 720, 960 708 S 1600 715, 1970 705"/>
+    <path d="M -50 802 C 280 790, 600 812, 940 795 S 1580 808, 1970 795"/>
+    <path d="M -50 895 C 260 880, 580 905, 920 885 S 1560 900, 1970 882"/>
+  </g>
+
+  <g opacity="0.65">
+    <path d="M 120 745 Q 240 740 380 748 T 600 745" stroke="url(#copperVein)" stroke-width="1.2" fill="none"/>
+    <path d="M 780 830 Q 920 822 1080 832 T 1340 828" stroke="url(#copperVein)" stroke-width="1.2" fill="none"/>
+    <path d="M 1380 920 Q 1520 912 1680 922 T 1880 918" stroke="url(#copperVein)" stroke-width="1.4" fill="none"/>
+  </g>
+
+  <g opacity="0.9">
+    <circle cx="320" cy="755" r="1.6" fill="#E8A460"/>
+    <circle cx="620" cy="828" r="1.8" fill="#E8A460"/>
+    <circle cx="1020" cy="808" r="1.4" fill="#E8A460"/>
+    <circle cx="1340" cy="900" r="2" fill="#E8A460"/>
+    <circle cx="1650" cy="892" r="1.6" fill="#E8A460"/>
+    <circle cx="1780" cy="820" r="1.4" fill="#E8A460"/>
+  </g>
+
+  <g opacity="0.3" stroke="#E8A460" stroke-width="0.3" fill="none">
+    <path d="M 0 620 Q 480 610 960 625 T 1920 615"/>
+    <path d="M 0 650 Q 480 640 960 655 T 1920 645"/>
+    <path d="M 0 680 Q 480 670 960 685 T 1920 675"/>
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#dust)" opacity="0.6"/>
+  <rect x="0" y="400" width="1920" height="680" fill="url(#fog)" opacity="0.35"/>
+</svg>
