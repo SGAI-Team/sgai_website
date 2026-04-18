@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 const SITE = "https://sgai.cl";
 
 export default function sitemap(): MetadataRoute.Sitemap {

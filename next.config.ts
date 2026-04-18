@@ -12,9 +12,24 @@ const immutableCache = [
 ];
 
 const nextConfig: NextConfig = {
+  // Static export para Azure Static Web Apps: genera HTML estático en /out
+  // Las rutas (/contacto, /plataforma, etc.) quedan como archivos .html.
+  // staticwebapp.config.json maneja rewrites + security headers en prod.
+  output: "export",
+
+  // Next 16 exige trailingSlash para generar carpetas con index.html
+  // que Azure SWA puede servir sin rewrites complejos.
+  trailingSlash: true,
+
+  // Azure SWA no soporta Image Optimization con static export.
+  images: { unoptimized: true },
+
   allowedDevOrigins: ["*.ngrok-free.dev", "*.ngrok-free.app", "*.ngrok.app"],
 
   async headers() {
+    // Los headers de next.config NO aplican en static export.
+    // Se mantienen para modo dev y dejar documentado el intent.
+    // Los headers reales en producción vienen de staticwebapp.config.json.
     return [
       { source: "/:path*", headers: securityHeaders },
       { source: "/og/:path*", headers: immutableCache },
