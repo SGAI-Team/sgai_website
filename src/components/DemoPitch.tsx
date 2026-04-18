@@ -234,33 +234,64 @@ export function DemoPitch() {
         </div>
       </section>
 
-      {/* 3. Anti-Ariba */}
+      {/* 3. Lo que nos diferencia */}
       <section className="gradient-hero py-24 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
             Lo que nos diferencia
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-white mb-8 max-w-3xl leading-tight">
-            No queremos ser otra SAP Ariba.
+          <h2 className="font-heading text-4xl md:text-5xl text-white mb-6 max-w-3xl leading-tight">
+            La diferencia la hace cómo te acompañamos, no solo el software.
           </h2>
-          <p className="text-sgai-steel text-lg leading-relaxed mb-10 max-w-3xl">
-            Las plataformas globales llegan con un manual de cómo debería ser
-            tu proceso. Tú ajustas tu operación al software. Con SGAI es al
-            revés: la plataforma se adapta a cómo trabajas, no tú a ella.
+          <p className="text-sgai-steel text-lg leading-relaxed mb-12 max-w-3xl">
+            Combinamos tecnología, servicio y contexto local. Cada uno por
+            separado existe en el mercado. La ventaja está en tenerlos
+            integrados, hablando entre sí, y operando con gente que entiende
+            faena.
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+
+          <div className="grid md:grid-cols-2 gap-6">
             <Diff
-              title="Flexibles"
-              body="Configuramos módulos específicos para tu flujo. No pagas por 40 funciones que nunca usarás."
+              icon="⚡"
+              title="Puesta en marcha en semanas, no en años"
+              body="El primer módulo activo en 6-10 semanas. Nada de proyectos de 18 meses donde el cliente paga implementación antes de ver resultado. Pagas cuando el agente ya está operando."
             />
             <Diff
-              title="Locales"
-              body="Español, compliance chileno, integraciones con Ariba/JDE/SAP y también con las planillas que siguen vivas."
+              icon="🧩"
+              title="BPO y plataforma integrados de fábrica"
+              body="Los ingenieros que ejecutan tu procurement son los mismos que entrenan los agentes de IA. Nadie más en el mercado combina ambos con este nivel de acoplamiento."
             />
             <Diff
-              title="Escuchamos"
-              body="Antes de proponer, mapeamos tu operación real. El roadmap se construye con tu input, no contra él."
+              icon="🇨🇱"
+              title="Equipo local con kilómetros en faena"
+              body="+12 años operando en la gran minería chilena. Hablamos el idioma de SAP Ariba, JDE, SAP S/4 y también del Excel que sigue gobernando un 60% del proceso real."
             />
+            <Diff
+              icon="🎛️"
+              title="Modular: activas lo que necesitas"
+              body="¿Solo quieres revisión de Bases Técnicas? Se activa ese módulo. ¿Sumas monitoreo de contratos el siguiente trimestre? Se agrega. No cobramos por funciones que no usas."
+            />
+            <Diff
+              icon="🔌"
+              title="Se conecta a lo que ya tienes"
+              body="Ariba, JDE, SAP S/4, Buk, SharePoint o planillas compartidas. No te obligamos a migrar antes de empezar. La plataforma lee y escribe sobre tu stack actual."
+            />
+            <Diff
+              icon="📈"
+              title="ROI medible desde el primer trimestre"
+              body="Antes de firmar te entregamos un diagnóstico con números propios de tu operación: HH ahorradas, contratos por revisar, riesgo de desfinanciamiento. Si no cierra el caso, no cierra el contrato."
+            />
+          </div>
+
+          <div className="mt-12 bg-sgai-slate/50 border border-sgai-copper/20 rounded-2xl p-8 max-w-4xl">
+            <p className="text-sgai-copper text-xs font-bold uppercase tracking-wider mb-3">
+              En resumen
+            </p>
+            <p className="text-white text-xl md:text-2xl leading-relaxed font-heading">
+              Te damos servicio experto, tecnología propia y velocidad de
+              arranque — sin obligarte a rediseñar tu operación para que calce
+              con nuestro software.
+            </p>
           </div>
         </div>
       </section>
@@ -539,9 +570,18 @@ export function DemoPitch() {
   );
 }
 
-function Diff({ title, body }: { title: string; body: string }) {
+function Diff({
+  icon,
+  title,
+  body,
+}: {
+  icon?: string;
+  title: string;
+  body: string;
+}) {
   return (
-    <div className="bg-sgai-slate/50 border border-white/10 rounded-xl p-6">
+    <div className="bg-sgai-slate/50 border border-white/10 rounded-xl p-6 hover:border-sgai-copper/40 transition-colors">
+      {icon ? <div className="text-3xl mb-3">{icon}</div> : null}
       <h3 className="font-heading text-xl text-white mb-3">{title}</h3>
       <p className="text-sgai-steel text-sm leading-relaxed">{body}</p>
     </div>
