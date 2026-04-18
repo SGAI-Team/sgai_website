@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { HeroBackground } from "@/components/HeroBackground";
+import { trackCtaClick } from "@/lib/analytics";
 
 export function HeroSection() {
   return (
@@ -80,6 +81,7 @@ export function HeroSection() {
           >
             <Link
               href="/contacto"
+              onClick={() => trackCtaClick("hero", "Solicita una demo")}
               className="group inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-all text-lg hover:shadow-[0_10px_40px_-10px_rgba(200,117,51,0.7)] hover:-translate-y-0.5"
             >
               Solicita una demo
@@ -92,6 +94,7 @@ export function HeroSection() {
             </Link>
             <Link
               href="/plataforma"
+              onClick={() => trackCtaClick("hero", "Conoce la plataforma")}
               className="inline-flex items-center justify-center gap-2 border border-white/20 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/5 hover:border-white/40 transition-all text-lg hover:-translate-y-0.5"
             >
               Conoce la plataforma

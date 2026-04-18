@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -11,11 +11,13 @@ import {
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/SectionReveal";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
-  title: "Abastecimiento Inteligente para Minería",
+export const metadata = pageMetadata({
+  title: "Abastecimiento con IA para Minería del Cobre y Litio en Chile",
   description:
-    "BPO y plataforma con IA para la industria minera. Integración SAP Ariba, JDE. Compliance chileno. Revisión de Bases Técnicas con IA.",
-};
+    "BPO + plataforma con IA para la gran minería chilena. Integración SAP Ariba y JDE, revisión de Bases Técnicas, compliance local y operación en español. US$83B en pipeline al 2033.",
+  path: "/industrias/mineria",
+  ogImage: "mineria.png",
+});
 
 const pains = [
   {

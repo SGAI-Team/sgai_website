@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ContactForm } from "@/components/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Ingeniería y Construcción",
+export const metadata = pageMetadata({
+  title: "Procurement para Ingeniería y Construcción (EPC/EPCM)",
   description:
-    "Soluciones de abastecimiento inteligente para ingeniería y construcción. Próximamente.",
-};
+    "BPO + plataforma con IA para proyectos EPC/EPCM con miles de OCs y contratos simultáneos en Chile. Tracking de entregables, compliance contractual y visibilidad en tiempo real.",
+  path: "/industrias/construccion",
+  ogImage: "construccion.png",
+});
 
 export default function ConstruccionPage() {
   return (

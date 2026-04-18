@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { SectionReveal } from "@/components/SectionReveal";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
-  title: "Preguntas Frecuentes",
+export const metadata = pageMetadata({
+  title: "Preguntas Frecuentes sobre SGAI",
   description:
-    "Respuestas a las preguntas más comunes sobre SGAI, nuestro servicio BPO y plataforma de procurement con IA.",
-};
+    "Respuestas a dudas sobre el BPO, la plataforma, los módulos con IA, integraciones con SAP Ariba/JDE, tiempos de implementación y licenciamiento.",
+  path: "/faq",
+  ogImage: "faq.png",
+});
 
 const faqItems = [
   {
@@ -63,9 +65,23 @@ const faqItems = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((i) => ({
+    "@type": "Question",
+    name: i.question,
+    acceptedAnswer: { "@type": "Answer", text: i.answer },
+  })),
+};
+
 export default function FAQPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <section className="bg-sgai-white pt-32 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
           <SectionReveal>

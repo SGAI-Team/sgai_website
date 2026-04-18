@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { IndustryCard } from "@/components/IndustryCard";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/SectionReveal";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
-  title: "Industrias",
+export const metadata = pageMetadata({
+  title: "Industrias: Minería, Energía, Construcción e Industria",
   description:
-    "Soluciones de abastecimiento para minería, energía, construcción e industria en Latinoamérica.",
-};
+    "Soluciones de abastecimiento con IA para industrias donde la gestión de contratos es compleja y crítica. Minería del cobre y litio, energía, oil & gas y EPC en Chile y Latinoamérica.",
+  path: "/industrias",
+  ogImage: "industrias.png",
+});
 
 const industries = [
   {

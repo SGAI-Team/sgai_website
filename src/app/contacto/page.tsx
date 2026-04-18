@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Mail, MapPin, ExternalLink } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionReveal } from "@/components/SectionReveal";
 
-export const metadata: Metadata = {
-  title: "Contacto",
+export const metadata = pageMetadata({
+  title: "Contacto — Agenda una Demo de SGAI",
   description:
-    "Conversemos sobre cómo SGAI puede ayudarte con tu operación de abastecimiento. Solicita una demo personalizada.",
-};
+    "Conversemos sobre tu operación de abastecimiento. Demo personalizada y diagnóstico gratuito. Respondemos en menos de 24 horas hábiles desde Santiago, Chile.",
+  path: "/contacto",
+  ogImage: "contacto.png",
+});
 
 export default function ContactoPage() {
   return (

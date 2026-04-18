@@ -3,8 +3,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import { getUtmParams, UTM_KEYS, type UtmParams } from "@/lib/utm";
+import { trackLead, trackFormStart } from "@/lib/analytics";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Ingresa tu nombre completo"),
@@ -28,6 +30,19 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [utm, setUtm] = useState<UtmParams>({});
+  const [formStarted, setFormStarted] = useState(false);
+
+  useEffect(() => {
+    setUtm(getUtmParams());
+  }, []);
+
+  const handleFirstFocus = () => {
+    if (!formStarted) {
+      setFormStarted(true);
+      trackFormStart("contacto");
+    }
+  };
 
   const {
     register,
@@ -38,10 +53,26 @@ export function ContactForm() {
   });
 
   async function onSubmit(data: ContactFormData) {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form data:", data);
-    setSubmitted(true);
+    const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
+    const payload = { ...data, ...utm, source: "sgai.cl/contacto" };
+    try {
+      if (endpoint) {
+        await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Sin endpoint configurado: al menos persiste en consola + dataLayer
+        if (typeof window !== "undefined") {
+          window.dataLayer?.push({ event: "sgai_lead_payload", payload });
+        }
+      }
+      trackLead({ form: "contacto", industry: data.industry, interest: data.interest });
+      setSubmitted(true);
+    } catch {
+      alert("Error al enviar. Escríbenos a contacto@sgai.cl si el problema persiste.");
+    }
   }
 
   if (submitted) {
@@ -59,7 +90,16 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      onFocus={handleFirstFocus}
+      className="space-y-5"
+    >
+      {/* UTMs hidden para persistir origen del lead */}
+      {UTM_KEYS.map((k) => (
+        <input key={k} type="hidden" name={k} value={utm[k] ?? ""} readOnly />
+      ))}
+
       {/* Name */}
       <div>
         <label

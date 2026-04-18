@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Clock, Brain, Scale } from "lucide-react";
 import { TeamCard } from "@/components/TeamCard";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/SectionReveal";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
-  title: "Nosotros",
+export const metadata = pageMetadata({
+  title: "Nosotros — Equipo con +12 años en procurement minero chileno",
   description:
-    "Conoce al equipo detrás de SGAI. Profesionales con +12 años de experiencia en abastecimiento industrial.",
-};
+    "Fundado por profesionales con más de 12 años en abastecimiento directo en la gran minería chilena. Construimos SGAI desde la experiencia operativa, no desde la teoría.",
+  path: "/nosotros",
+  ogImage: "nosotros.png",
+});
 
 const team = [
   {
@@ -70,9 +72,45 @@ const values = [
   },
 ];
 
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "SGAI",
+  alternateName: "SGAI Abastecimiento Inteligente",
+  url: "https://sgai.cl/",
+  logo: "https://sgai.cl/og/home.png",
+  description:
+    "Consultora chilena de abastecimiento inteligente. BPO de procurement + plataforma con IA para minería, energía y construcción.",
+  priceRange: "$$$",
+  email: "contacto@sgai.cl",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Santiago",
+    addressRegion: "RM",
+    addressCountry: "CL",
+  },
+  areaServed: [
+    { "@type": "Country", name: "Chile" },
+    { "@type": "Country", name: "Perú" },
+    { "@type": "Country", name: "Colombia" },
+    { "@type": "Country", name: "México" },
+  ],
+  knowsAbout: [
+    "BPO procurement",
+    "Gestión de contratos mineros",
+    "Bases Técnicas",
+    "SAP Ariba",
+    "Agentes de IA",
+  ],
+};
+
 export default function NosotrosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
       {/* Hero */}
       <section className="bg-sgai-white pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">

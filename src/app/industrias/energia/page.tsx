@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ContactForm } from "@/components/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Energía y Oil & Gas",
+export const metadata = pageMetadata({
+  title: "Procurement para Energía y Oil & Gas",
   description:
-    "Soluciones de abastecimiento inteligente para la industria energética. Próximamente.",
-};
+    "BPO + plataforma con IA para contratos de largo plazo, compliance regulatorio y licitaciones multi-jurisdicción en energía, generación y oil & gas en Latinoamérica.",
+  path: "/industrias/energia",
+  ogImage: "energia.png",
+});
 
 export default function EnergiaPage() {
   return (

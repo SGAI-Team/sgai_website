@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import {
   ClipboardList,
@@ -16,11 +16,13 @@ import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/Secti
 import { FeatureCard } from "@/components/FeatureCard";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Plataforma de Procurement con IA",
   description:
-    "Software de abastecimiento con inteligencia artificial. Revisión de BT, monitoreo de contratos, análisis de propuestas. Diseñado para Latinoamérica.",
-};
+    "Software de abastecimiento con IA para minería y energía en Chile: revisión de Bases Técnicas, monitoreo de contratos y análisis de propuestas. Integra SAP Ariba, JDE y ERP locales.",
+  path: "/plataforma",
+  ogImage: "plataforma.png",
+});
 
 const modules = [
   {
@@ -114,9 +116,26 @@ const roadmap = [
   },
 ];
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Plataforma de Procurement con IA",
+  name: "Plataforma SGAI",
+  provider: { "@type": "Organization", name: "SGAI", url: "https://sgai.cl/" },
+  areaServed: { "@type": "Country", name: "Chile" },
+  description:
+    "Software de abastecimiento con IA: revisión de Bases Técnicas, monitoreo de contratos, análisis de propuestas, alertas de desfinanciamiento.",
+  url: "https://sgai.cl/plataforma",
+  audience: { "@type": "BusinessAudience", audienceType: "Minería, energía, construcción e industria" },
+};
+
 export default function PlataformaPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       {/* Hero */}
       <section className="gradient-hero pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">

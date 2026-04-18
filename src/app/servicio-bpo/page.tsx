@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import {
   FileText,
@@ -13,11 +13,13 @@ import { FeatureCard } from "@/components/FeatureCard";
 import { TimelineStep } from "@/components/TimelineStep";
 import { CTABanner } from "@/components/CTABanner";
 
-export const metadata: Metadata = {
-  title: "Servicio BPO de Abastecimiento",
+export const metadata = pageMetadata({
+  title: "Servicio BPO de Abastecimiento Minero e Industrial en Chile",
   description:
-    "Ingenieros de procurement dedicados a tu operación. Gestión de contratos, OC y licitaciones con plataforma de IA incluida.",
-};
+    "Ingenieros de procurement dedicados a tu operación en Chile. Gestión de contratos, órdenes de compra y licitaciones. Plataforma SGAI con IA incluida sin costo adicional.",
+  path: "/servicio-bpo",
+  ogImage: "servicio-bpo.png",
+});
 
 const services = [
   {
@@ -103,9 +105,26 @@ const differentiators = [
   },
 ];
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "BPO de abastecimiento y procurement",
+  name: "Servicio BPO SGAI",
+  provider: { "@type": "Organization", name: "SGAI", url: "https://sgai.cl/" },
+  areaServed: { "@type": "Country", name: "Chile" },
+  description:
+    "Ingenieros de procurement dedicados a tu operación: gestión de contratos, órdenes de compra y licitaciones como extensión de tu equipo. Plataforma SGAI incluida.",
+  url: "https://sgai.cl/servicio-bpo",
+  audience: { "@type": "BusinessAudience", audienceType: "Gran minería, energía e industria pesada" },
+};
+
 export default function ServicioBPOPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       {/* Hero */}
       <section className="bg-sgai-white pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
