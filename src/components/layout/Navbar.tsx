@@ -17,6 +17,7 @@ const navLinks = [
   { name: "Servicio BPO", href: "/servicio-bpo" },
   { name: "Plataforma", href: "/plataforma" },
   { name: "Industrias", href: "/industrias", children: industries },
+  { name: "Blog", href: "/blog" },
   { name: "Nosotros", href: "/nosotros" },
 ];
 

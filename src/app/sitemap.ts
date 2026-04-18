@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/nosotros", priority: 0.6, changeFrequency: "monthly" },
     { path: "/contacto", priority: 0.8, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.5, changeFrequency: "monthly" },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/blog/ley-40-horas-contratos-mineros", priority: 0.8, changeFrequency: "monthly" },
   ];
 
   return routes.map((r) => ({
