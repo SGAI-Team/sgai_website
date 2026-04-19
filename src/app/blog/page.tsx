@@ -22,6 +22,16 @@ type Post = {
 
 const posts: Post[] = [
   {
+    slug: "ley-40-horas-contratos-indexados-abastecimiento",
+    title:
+      "Ley de 40 horas y contratos indexados: la matemática que hay que reescribir",
+    excerpt:
+      "Entre el 40% y 70% de los contratos de una faena son indexados. La Ley 21.561 rompe la fórmula de reajuste y obliga a recalcular. Con diagramas, tabla de impacto y plan de acción.",
+    date: "19 abril 2026",
+    author: "SGAI — Equipo Contractual",
+    gradient: "from-emerald-500 to-teal-600",
+  },
+  {
     slug: "ley-40-horas-contratos-mineros",
     title:
       "Ley de 40 horas aplicada a contratos mineros: cómo absorbe el impacto un BPO de procurement",

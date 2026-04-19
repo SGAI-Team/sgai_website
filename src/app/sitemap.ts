@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contacto", priority: 0.8, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.5, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/blog/ley-40-horas-contratos-indexados-abastecimiento", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog/ley-40-horas-contratos-mineros", priority: 0.8, changeFrequency: "monthly" },
   ];
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ArrowLeft,
-  ChevronRight,
   Scale,
   AlertTriangle,
   FileText,
@@ -9,8 +8,10 @@ import {
   Workflow,
   Clock,
   TrendingDown,
+  ChevronRight,
 } from "lucide-react";
 import { pageMetadata } from "@/lib/metadata";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const SLUG = "ley-40-horas-contratos-mineros";
 const URL = `https://sgai.cl/blog/${SLUG}`;
@@ -115,17 +116,16 @@ export default function BlogLey40HorasContratosMineros() {
 
       <section className="gradient-hero pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <nav className="flex items-center text-sm text-sgai-steel mb-6" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-sgai-copper transition-colors">
-              Inicio
-            </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
-            <Link href="/blog" className="hover:text-sgai-copper transition-colors">
-              Blog
-            </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-white/80">Ley 40 horas en contratos mineros</span>
-          </nav>
+          <div className="mb-6">
+            <Breadcrumbs
+              theme="dark"
+              items={[
+                { name: "Inicio", href: "/" },
+                { name: "Blog", href: "/blog" },
+                { name: "Ley 40 horas en contratos mineros" },
+              ]}
+            />
+          </div>
 
           <Link
             href="/blog"
@@ -497,6 +497,13 @@ export default function BlogLey40HorasContratosMineros() {
               </p>
               <p className="mt-3">
                 Lee también:{" "}
+                <Link
+                  href="/blog/ley-40-horas-contratos-indexados-abastecimiento"
+                  className="text-sgai-copper hover:underline"
+                >
+                  Ley 40h en contratos indexados (cláusulas β/γ)
+                </Link>{" "}
+                ·{" "}
                 <Link href="/plataforma" className="text-sgai-copper hover:underline">
                   Plataforma SGAI
                 </Link>{" "}
