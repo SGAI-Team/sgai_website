@@ -22,39 +22,104 @@ import { trackEvent, trackFormStart } from "@/lib/analytics";
 
 const modules = [
   {
-    icon: Search,
-    name: "Revisión de Bases Técnicas con IA",
+    icon: Compass,
+    name: "Planificación",
+    tagline: "Antes de comprar, entender",
     description:
-      "Lee BT de 200+ páginas en minutos, detecta inconsistencias, cláusulas críticas y resume lo que tu equipo tiene que decidir.",
-    benefit: "-70% HH de revisión manual",
+      "Define qué necesitas, cuándo y a qué costo total. Mapea demanda, riesgo y mercado antes de salir a buscar proveedor.",
+    color: "from-sky-500 to-blue-600",
+    accent: "text-sky-600",
+    border: "border-sky-200",
+    bg: "bg-sky-50",
+    features: [
+      "Planificación de categorías",
+      "Demanda proyectada",
+      "Análisis de riesgo",
+      "TCO (costo total de propiedad)",
+      "Inteligencia de mercado",
+      "Estrategia de sourcing",
+      "Simulación de escenarios",
+    ],
+  },
+  {
+    icon: Users,
+    name: "Proveedores",
+    tagline: "Conoce con quién contratas",
+    description:
+      "Pre-califica, evalúa y monitorea proveedores con un ranking IA basado en desempeño real, no en intuición.",
+    color: "from-purple-500 to-violet-600",
+    accent: "text-purple-600",
+    border: "border-purple-200",
+    bg: "bg-purple-50",
+    features: [
+      "Maestro de proveedores",
+      "Precalificación automatizada",
+      "Evaluación 360°",
+      "Segmentación estratégica",
+      "Compliance y riesgo",
+      "Seguimiento de desempeño",
+      "Ranking IA",
+      "Indicadores ESG",
+    ],
   },
   {
     icon: FileText,
-    name: "Monitoreo de contratos",
+    name: "Documentos y Contratos",
+    tagline: "Tu stock contractual vivo",
     description:
-      "Seguimiento en tiempo real de vencimientos, hitos, entregables y desfinanciamiento. Alertas antes de que el problema crezca.",
-    benefit: "Cero sorpresas en cierre de mes",
+      "Genera Bases Técnicas con IA, controla versiones, mantiene biblioteca centralizada y firma electrónicamente.",
+    color: "from-emerald-500 to-teal-600",
+    accent: "text-emerald-600",
+    border: "border-emerald-200",
+    bg: "bg-emerald-50",
+    features: [
+      "Generación de BT con IA",
+      "Control de versiones",
+      "Biblioteca contractual",
+      "Flujos y aprobaciones",
+      "Firma electrónica",
+      "Repositorio auditable",
+    ],
   },
   {
     icon: ClipboardList,
-    name: "Análisis de propuestas",
+    name: "Licitación",
+    tagline: "Decisiones trazables, no intuición",
     description:
-      "Consolida ofertas comerciales, extrae comparables y arma matrices de evaluación en una pasada. Reduce sesgo del comprador.",
-    benefit: "Decisiones trazables y auditables",
+      "Publica, recibe ofertas, evalúa multicriterio, simula escenarios y recibe recomendación de adjudicación con respaldo IA.",
+    color: "from-cyan-500 to-blue-500",
+    accent: "text-cyan-600",
+    border: "border-cyan-200",
+    bg: "bg-cyan-50",
+    features: [
+      "Publicación de licitación",
+      "Recepción de ofertas",
+      "Evaluación multicriterio",
+      "Simulación de escenarios",
+      "Ranking IA panel de decisión",
+      "Recomendación de adjudicación",
+      "Transferencia a administración",
+    ],
   },
   {
     icon: Shield,
-    name: "Revisión pre-firma",
+    name: "Administración y Auditoría",
+    tagline: "Lo que pasa después de firmar",
     description:
-      "Detecta cláusulas de riesgo antes de firmar. Cruza con tu política de compras y resalta excepciones.",
-    benefit: "Menos sorpresas legales post-firma",
-  },
-  {
-    icon: LayoutDashboard,
-    name: "Tablero ejecutivo",
-    description:
-      "Un solo panel con KPIs reales: compliance, lead time, ahorros, riesgo, cobertura de contratos. Exportable a PPT y Power BI.",
-    benefit: "Info para decidir en 60 segundos",
+      "Estados de pago digitales, KPI y SLA en vivo, reajustes automáticos, modificaciones controladas y auditoría continua.",
+    color: "from-rose-500 to-pink-600",
+    accent: "text-rose-600",
+    border: "border-rose-200",
+    bg: "bg-rose-50",
+    features: [
+      "Estados de pago digital",
+      "KPI y SLA en tiempo real",
+      "Reajustes automáticos",
+      "Modificaciones de contrato",
+      "Auditoría continua",
+      "Garantías financieras",
+      "Riesgos y predicciones IA",
+    ],
   },
 ];
 
@@ -296,53 +361,102 @@ export function DemoPitch() {
         </div>
       </section>
 
-      {/* 4. 5 Módulos */}
+      {/* 4. 5 Módulos — ciclo completo de procurement */}
       <section className="bg-sgai-white py-24 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
             La plataforma
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-sgai-midnight mb-6 max-w-3xl leading-tight">
-            Cinco módulos que cubren el ciclo completo.
+            Cinco módulos. 36 capacidades. Un solo ciclo.
           </h2>
           <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-12">
-            Cada módulo resuelve un problema concreto del ciclo de procurement.
-            Puedes activarlos todos de una, o empezar por el que más te duele y
-            sumar después.
+            Cada módulo cubre una etapa del proceso de abastecimiento, desde la
+            planificación previa hasta la auditoría post-firma. Puedes activarlos
+            todos o empezar por el que más te duele — la plataforma escala
+            contigo.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Flujo del ciclo */}
+          <div className="hidden md:flex items-center justify-between mb-10 px-2">
+            {modules.map((m, i) => (
+              <div key={m.name} className="flex items-center">
+                <span className="text-xs font-bold uppercase tracking-wider text-sgai-steel">
+                  {String(i + 1).padStart(2, "0")} · {m.name}
+                </span>
+                {i < modules.length - 1 ? (
+                  <ArrowRight className="w-4 h-4 mx-3 text-sgai-copper/60" />
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          {/* Grid de 5 columnas con todas las features */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
             {modules.map((m, i) => {
               const Icon = m.icon;
               return (
                 <div
                   key={m.name}
-                  className="bg-sgai-ice border border-gray-200 rounded-2xl p-8 hover:border-sgai-copper/40 transition-colors"
+                  className={`group relative rounded-2xl border ${m.border} ${m.bg} overflow-hidden flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all`}
                 >
-                  <div className="flex items-start gap-5">
-                    <div className="w-14 h-14 rounded-xl gradient-copper flex items-center justify-center shrink-0">
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-bold text-sgai-copper uppercase tracking-wider">
-                          Módulo {i + 1}
-                        </span>
-                      </div>
-                      <h3 className="font-heading text-xl text-sgai-midnight mb-2">
-                        {m.name}
-                      </h3>
-                      <p className="text-sgai-steel text-base leading-relaxed mb-3">
-                        {m.description}
-                      </p>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-sgai-copper">
-                        <Check className="w-4 h-4" />
-                        {m.benefit}
+                  {/* Header */}
+                  <div className={`bg-gradient-to-br ${m.color} p-6 text-white`}>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">
+                        Módulo {i + 1}
                       </span>
+                      <Icon className="w-6 h-6 text-white/90" />
                     </div>
+                    <h3 className="font-heading text-2xl mb-1.5 leading-tight">
+                      {m.name}
+                    </h3>
+                    <p className="text-white/85 text-sm leading-snug">
+                      {m.tagline}
+                    </p>
+                  </div>
+
+                  {/* Body */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    <p className="text-sgai-midnight/80 text-sm leading-relaxed mb-4">
+                      {m.description}
+                    </p>
+                    <div className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${m.accent}`}>
+                      Incluye
+                    </div>
+                    <ul className="space-y-1.5 mt-auto">
+                      {m.features.map((f) => (
+                        <li
+                          key={f}
+                          className="flex items-start gap-2 text-sm text-sgai-midnight/90"
+                        >
+                          <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${m.accent}`} />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Cierre */}
+          <div className="mt-12 max-w-3xl bg-sgai-ice border border-gray-200 rounded-2xl p-8">
+            <p className="text-sgai-copper text-xs font-bold uppercase tracking-widest mb-3">
+              Cómo lo activas
+            </p>
+            <p className="text-sgai-midnight text-lg leading-relaxed mb-4">
+              No tienes que activar los 5 al mismo tiempo. La mayoría de
+              clientes empieza por <strong>Documentos &amp; Contratos</strong> o
+              <strong> Licitación</strong> (los que duelen más rápido) y suma
+              los demás en los siguientes trimestres.
+            </p>
+            <p className="text-sgai-steel text-sm">
+              Lo que SÍ recomendamos: que el primer módulo activo esté
+              integrado a tu sistema actual (Ariba, JDE, SharePoint o lo que
+              uses) desde el día uno. Eso evita la doble carga de datos.
+            </p>
           </div>
         </div>
       </section>
