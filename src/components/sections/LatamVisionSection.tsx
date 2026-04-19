@@ -2,9 +2,9 @@ import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/Secti
 
 const countries = [
   { flag: "🇨🇱", name: "Chile", status: "Operativo" },
+  { flag: "🇦🇷", name: "Argentina", status: "Próximamente" },
+  { flag: "🇧🇷", name: "Brasil", status: "Próximamente" },
   { flag: "🇵🇪", name: "Perú", status: "Próximamente" },
-  { flag: "🇨🇴", name: "Colombia", status: "Próximamente" },
-  { flag: "🇲🇽", name: "México", status: "Próximamente" },
 ];
 
 export function LatamVisionSection() {

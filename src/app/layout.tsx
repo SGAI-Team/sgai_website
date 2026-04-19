@@ -94,9 +94,9 @@ const organizationSchema = {
   industry: "Procurement Technology",
   areaServed: [
     { "@type": "Country", name: "Chile" },
+    { "@type": "Country", name: "Argentina" },
+    { "@type": "Country", name: "Brasil" },
     { "@type": "Country", name: "Perú" },
-    { "@type": "Country", name: "Colombia" },
-    { "@type": "Country", name: "México" },
   ],
   knowsAbout: [
     "BPO de abastecimiento",

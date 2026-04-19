@@ -16,7 +16,7 @@ Este skill contiene **todo** lo necesario para producir assets de SGAI con coher
 - **Tagline extendida**: "Abastecimiento inteligente para empresas que construyen Latinoamérica"
 - **Qué es**: Consultora chilena que combina (a) BPO de procurement ejecutado por ingenieros senior y (b) plataforma propia con IA para gestión de contratos, órdenes de compra, licitaciones y revisión de Bases Técnicas.
 - **Sitio**: https://sgai.cl
-- **Mercado**: Chile (base), expansión a Perú, Colombia, México.
+- **Mercado**: Chile (base), expansión a Argentina, Brasil, Perú.
 - **Industrias prioritarias**: minería del cobre y litio > energía y oil&gas > ingeniería y construcción EPC/EPCM > industria y manufactura.
 - **Fundación**: 2026.
 - **Contacto**: contacto@sgai.cl · Santiago, RM, Chile.
