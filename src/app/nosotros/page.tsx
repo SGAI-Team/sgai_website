@@ -15,21 +15,21 @@ export const metadata = pageMetadata({
 const team = [
   {
     initials: "GR",
-    name: "Gonzalo",
+    name: "Gonzalo Rojas Chacón",
     role: "Chief Technology Officer",
-    bio: "Responsable del desarrollo técnico de la plataforma SGAI. Su rol es traducir las necesidades del negocio — levantadas en entrevistas con profesionales de abastecimiento — hacia una arquitectura funcional y escalable.",
+    bio: "Lidera la arquitectura técnica de la plataforma SGAI: agentes de IA, integraciones con SAP Ariba, JDE y ERP locales, e infraestructura escalable. Traduce el dolor operacional en producto.",
   },
   {
     initials: "CR",
-    name: "Claudio Romero",
-    role: "Chief Visionary Officer",
-    bio: "Autor intelectual y responsable del diseño conceptual de la solución. Su investigación académica fundamenta la lógica del negocio y define cómo debe funcionar una plataforma de procurement inteligente.",
+    name: "Claudio Romero Retamal",
+    role: "Chief Operating Officer",
+    bio: "Conduce la operación del servicio BPO y la coordinación de los equipos de procurement asignados a clientes. Asegura calidad, cumplimiento de SLAs y consistencia entre faena y plataforma.",
   },
   {
     initials: "CR",
-    name: "Claudio Rojas",
-    role: "Chief Commercial Officer",
-    bio: "Lidera la estrategia de comercialización y el plan de ventas. Co-lidera el relato del alcance técnico del producto y gestiona la hoja de ruta de clientes. Más de 12 años de experiencia directa en procesos de abastecimiento en la industria minera chilena.",
+    name: "Claudio Rojas Bermúdez",
+    role: "Chief Financial Officer",
+    bio: "Responsable del modelo financiero, planificación estratégica y relación con inversionistas y partners. +12 años en abastecimiento directo en la gran minería chilena, ahora aplicados al modelo de negocio.",
   },
 ];
 

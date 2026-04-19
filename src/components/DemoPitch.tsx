@@ -127,21 +127,21 @@ const modules = [
 const team = [
   {
     initials: "GR",
-    name: "Gonzalo",
+    name: "Gonzalo Rojas Chacón",
     role: "Chief Technology Officer",
-    bio: "Responsable del desarrollo técnico de la plataforma. Traduce necesidades de negocio en arquitectura funcional y escalable.",
+    bio: "Lidera la arquitectura técnica de la plataforma: agentes de IA, integraciones con SAP Ariba, JDE y ERP locales, e infraestructura escalable.",
   },
   {
     initials: "CR",
-    name: "Claudio Romero",
-    role: "Chief Visionary Officer",
-    bio: "Autor intelectual de la solución. Su investigación fundamenta la lógica del negocio y el modelo de procurement inteligente.",
+    name: "Claudio Romero Retamal",
+    role: "Chief Operating Officer",
+    bio: "Conduce la operación del servicio BPO y la coordinación de los equipos de procurement asignados a clientes. Asegura calidad y consistencia.",
   },
   {
     initials: "CR",
-    name: "Claudio Rojas",
-    role: "Chief Commercial Officer",
-    bio: "+12 años en abastecimiento directo en la gran minería chilena. Lidera estrategia comercial y relación con clientes.",
+    name: "Claudio Rojas Bermúdez",
+    role: "Chief Financial Officer",
+    bio: "+12 años en abastecimiento directo en la gran minería chilena. Hoy lidera el modelo financiero y la relación con inversionistas y partners.",
   },
 ];
 
