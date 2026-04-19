@@ -17,6 +17,7 @@ import {
   MessageSquare,
   Send,
   Check,
+  ArrowRight,
 } from "lucide-react";
 import { trackEvent, trackFormStart } from "@/lib/analytics";
 
