@@ -24,12 +24,22 @@ const nextConfig: NextConfig = {
   // Azure SWA no soporta Image Optimization con static export.
   images: { unoptimized: true },
 
-  allowedDevOrigins: ["*.ngrok-free.dev", "*.ngrok-free.app", "*.ngrok.app"],
+  allowedDevOrigins: [
+    "*.ngrok-free.dev",
+    "*.ngrok-free.app",
+    "*.ngrok.app",
+    "192.168.0.100",
+    "localhost",
+  ],
 
   async headers() {
-    // Los headers de next.config NO aplican en static export.
-    // Se mantienen para modo dev y dejar documentado el intent.
-    // Los headers reales en producción vienen de staticwebapp.config.json.
+    // Los headers de next.config NO aplican en static export (los reales
+    // vienen de staticwebapp.config.json en producción). En dev los
+    // headers immutable rompen HMR / refresco de bundles, por eso solo
+    // mandamos headers de seguridad documentales.
+    if (process.env.NODE_ENV !== "production") {
+      return [{ source: "/:path*", headers: securityHeaders }];
+    }
     return [
       { source: "/:path*", headers: securityHeaders },
       { source: "/og/:path*", headers: immutableCache },

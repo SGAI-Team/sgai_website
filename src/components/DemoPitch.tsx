@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import {
   Compass,
   LayoutDashboard,
-  Search,
   FileText,
   ClipboardList,
   Shield,
@@ -14,12 +16,48 @@ import {
   Clock,
   Eye,
   Layers,
-  MessageSquare,
-  Send,
   Check,
-  ArrowRight,
+  Building2,
+  Package,
+  Target,
+  GitBranch,
+  AlertCircle,
+  Flame,
+  TrendingDown,
+  RotateCw,
+  Wand2,
+  MessageCircle,
+  Sparkles,
 } from "lucide-react";
-import { trackEvent, trackFormStart } from "@/lib/analytics";
+import { HeroBackground } from "@/components/HeroBackground";
+import { trackEvent } from "@/lib/analytics";
+
+const bpoBreakdown = [
+  {
+    icon: Users,
+    title: "Equipo especializado asignado",
+    body:
+      "Ingenieros senior de procurement con experiencia real en faena, no call-center. Se integran a tu equipo como una extensión del área.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Procesos repetitivos ejecutados",
+    body:
+      "Licitaciones, órdenes de compra, revisión de BT, seguimiento de contratos, estados de pago. Lo que hoy te quema horas.",
+  },
+  {
+    icon: Shield,
+    title: "Responsabilidad contractual",
+    body:
+      "El BPO asume SLA, KPI y calidad. Si algo falla, responde SGAI — no queda en el aire entre áreas internas.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Apoyado por plataforma con IA",
+    body:
+      "El BPO opera sobre nuestra plataforma. La IA asiste al equipo humano, no lo reemplaza: revisa documentos, alerta riesgos, sugiere adjudicaciones.",
+  },
+];
 
 const modules = [
   {
@@ -33,13 +71,12 @@ const modules = [
     border: "border-sky-200",
     bg: "bg-sky-50",
     features: [
-      "Planificación de categorías",
-      "Demanda proyectada",
-      "Análisis de riesgo",
-      "TCO (costo total de propiedad)",
-      "Inteligencia de mercado",
-      "Estrategia de sourcing",
-      "Simulación de escenarios",
+      "Demanda",
+      "Riesgo",
+      "TCO",
+      "Mercado",
+      "Sourcing",
+      "Simulación",
     ],
   },
   {
@@ -53,14 +90,13 @@ const modules = [
     border: "border-purple-200",
     bg: "bg-purple-50",
     features: [
-      "Maestro de proveedores",
-      "Precalificación automatizada",
-      "Evaluación 360°",
-      "Segmentación estratégica",
-      "Compliance y riesgo",
-      "Seguimiento de desempeño",
+      "Precalificación",
+      "Evaluación",
+      "Segmentación",
+      "Riesgo y cumplimiento",
+      "Desempeño",
       "Ranking IA",
-      "Indicadores ESG",
+      "ESG",
     ],
   },
   {
@@ -74,12 +110,11 @@ const modules = [
     border: "border-emerald-200",
     bg: "bg-emerald-50",
     features: [
-      "Generación de BT con IA",
+      "Generación de BT IA",
       "Control de versiones",
       "Biblioteca contractual",
       "Flujos y aprobaciones",
       "Firma electrónica",
-      "Repositorio auditable",
     ],
   },
   {
@@ -93,13 +128,13 @@ const modules = [
     border: "border-cyan-200",
     bg: "bg-cyan-50",
     features: [
-      "Publicación de licitación",
+      "Publicación",
       "Recepción de ofertas",
       "Evaluación multicriterio",
       "Simulación de escenarios",
       "Ranking IA panel de decisión",
       "Recomendación de adjudicación",
-      "Transferencia a administración",
+      "Transferencia administración",
     ],
   },
   {
@@ -114,7 +149,7 @@ const modules = [
     bg: "bg-rose-50",
     features: [
       "Estados de pago digital",
-      "KPI y SLA en tiempo real",
+      "KPI y SLA",
       "Reajustes automáticos",
       "Modificaciones de contrato",
       "Auditoría continua",
@@ -142,6 +177,93 @@ const team = [
     name: "Claudio Rojas Bermúdez",
     role: "Chief Financial Officer",
     bio: "+12 años en abastecimiento directo en la gran minería chilena. Hoy lidera el modelo financiero y la relación con inversionistas y partners.",
+  },
+];
+
+type DiscoveryQuestion = {
+  icon: typeof Compass;
+  q: string;
+  a: string;
+};
+
+const discoveryGroups: {
+  label: string;
+  title: string;
+  subtitle: string;
+  accent: string;
+  iconBg: string;
+  questions: DiscoveryQuestion[];
+}[] = [
+  {
+    label: "Contexto",
+    title: "Entendamos cómo operan hoy",
+    subtitle:
+      "Antes de hablar de dolores, queremos ver el mapa. Estas preguntas nos ayudan a dibujarlo contigo.",
+    accent: "text-sgai-copper-light",
+    iconBg:
+      "bg-sgai-copper-light/10 text-sgai-copper-light border-sgai-copper-light/30",
+    questions: [
+      {
+        icon: Building2,
+        q: "¿Cómo está organizado hoy su proceso de abastecimiento?",
+        a: "Lo típico: un jefe corporativo que intenta consolidar, áreas que compran por proyecto o faena, y un maestro de proveedores fragmentado entre sistemas.",
+      },
+      {
+        icon: Users,
+        q: "¿Qué áreas participan con mayor frecuencia en el proceso?",
+        a: "Operaciones pide, Abastecimiento negocia, Legal revisa, Finanzas paga, Contraloría audita. Casi nunca hay una sola vista del ciclo completo.",
+      },
+      {
+        icon: Package,
+        q: "¿Cuáles son las categorías o tipos de compra más críticas?",
+        a: "Servicios de operación (mantención, perforación, transporte), insumos técnicos (diesel, neumáticos, reactivos) y servicios generales con contratos largos.",
+      },
+      {
+        icon: Target,
+        q: "¿Qué parte del proceso consideran más sensible o estratégica?",
+        a: "Las compras que si fallan detienen la faena. Ahí no hay margen para error, demora ni para una adjudicación mal fundada.",
+      },
+      {
+        icon: GitBranch,
+        q: "¿Cómo gestionan hoy proveedores, contratos y requerimientos?",
+        a: "Maestro en una plataforma, contratos en PDF/SharePoint, OCs en el ERP, requerimientos en correos y planillas. Cada capa es una fuente de verdad distinta.",
+      },
+    ],
+  },
+  {
+    label: "Dolores",
+    title: "Abramos la conversación sobre lo que duele",
+    subtitle:
+      "No hay respuesta correcta. Nos interesa lo que pasa en tu día a día, aunque suene básico.",
+    accent: "text-sgai-copper",
+    iconBg: "bg-sgai-copper/15 text-sgai-copper border-sgai-copper/40",
+    questions: [
+      {
+        icon: AlertCircle,
+        q: "¿Cuáles son hoy los principales desafíos que enfrentan en abastecimiento?",
+        a: "Visibilidad parcial, mucha tarea manual, presión por compliance sin herramientas adecuadas y rotación que se lleva el conocimiento del proceso.",
+      },
+      {
+        icon: Flame,
+        q: "¿Qué parte del proceso les genera más problemas o desgaste?",
+        a: "Licitación y evaluación de ofertas suele ser el cuello de botella. Revisar Bases Técnicas y alinear criterios entre áreas toma semanas.",
+      },
+      {
+        icon: TrendingDown,
+        q: "¿Dónde sienten que hoy hay más ineficiencias?",
+        a: "En la conciliación entre sistemas (ERP, sourcing, planillas) y en la revisión manual de documentos repetitivos que podrían automatizarse.",
+      },
+      {
+        icon: RotateCw,
+        q: "¿Qué situaciones se repiten y les gustaría resolver?",
+        a: "OCs con errores de tipeo, licitaciones que se repiten sin aprendizaje entre compradores, contratos que vencen sin aviso y reajustes manuales.",
+      },
+      {
+        icon: Wand2,
+        q: "Si pudieran corregir tres cosas del proceso actual, ¿cuáles serían?",
+        a: "Centralizar información, eliminar doble carga entre sistemas y tener alertas tempranas antes de que los problemas sean visibles para todos.",
+      },
+    ],
   },
 ];
 
@@ -185,214 +307,269 @@ const pains = [
 ];
 
 export function DemoPitch() {
-  const [submitted, setSubmitted] = useState(false);
-  const [started, setStarted] = useState(false);
-  const [form, setForm] = useState({
-    company: "",
-    role: "",
-    painText: "",
-    idea: "",
-    contactName: "",
-    contactEmail: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    if (!started) {
-      setStarted(true);
-      trackFormStart("demo_feedback");
-    }
-  };
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
-    const payload = { ...form, source: "sgai.cl/demo" };
-    try {
-      if (endpoint) {
-        await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      } else if (typeof window !== "undefined") {
-        window.dataLayer?.push({ event: "sgai_demo_feedback", payload });
-      }
-      trackEvent("demo_feedback_submitted", {
-        company: form.company,
-        has_idea: form.idea.length > 0,
-      });
-      setSubmitted(true);
-    } catch {
-      alert(
-        "No pudimos enviar tu mensaje. Escríbenos a contacto@sgai.cl — guardamos tu feedback manualmente.",
-      );
-    }
-  };
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
   return (
     <>
       {/* 1. Portada */}
       <section className="relative min-h-[90vh] flex items-center gradient-hero overflow-hidden px-6">
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full border border-sgai-copper/10 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full border border-sgai-copper/5 -translate-x-1/2 pointer-events-none" />
+        <div
+          className="absolute inset-0 bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: "url(/mining-hero.png)" }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 pointer-events-none bg-gradient-to-r from-sgai-midnight/85 via-sgai-midnight/50 to-sgai-midnight/30"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-sgai-midnight/90 via-transparent to-sgai-midnight/40"
+          aria-hidden="true"
+        />
+        <HeroBackground />
+
+        <motion.div
+          className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full border border-sgai-copper/10 translate-x-1/2 pointer-events-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full border border-sgai-copper/5 -translate-x-1/2 pointer-events-none"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute top-10 left-1/3 w-3 h-3 rounded-full bg-sgai-copper/40 pointer-events-none"
+          animate={{ y: [0, -14, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-16 right-1/4 w-2 h-2 rounded-full bg-sgai-copper-light/50 pointer-events-none"
+          animate={{ y: [0, -10, 0], opacity: [0.3, 0.9, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+
         <div className="relative max-w-5xl mx-auto py-24">
-          <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-5">
+          <motion.p
+            className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-5"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             Presentación SGAI · Conversación privada
-          </p>
-          <h1 className="font-heading text-5xl md:text-7xl text-white leading-[1.05] mb-6">
+          </motion.p>
+          <motion.h1
+            className="font-heading text-5xl md:text-7xl text-white leading-[1.05] mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             Esto es SGAI.
             <br />
             <span className="gradient-copper-text">
               Y queremos entender tu operación.
             </span>
-          </h1>
-          <p className="text-sgai-steel text-xl leading-relaxed max-w-3xl">
-            No somos otra plataforma rígida con módulos que no calzan con tu
-            realidad. Somos un equipo chileno que vivió el problema del
-            abastecimiento por dentro y construyó una solución flexible, con
-            BPO humano y una plataforma de IA que se adapta a cómo tú operas.
-          </p>
+          </motion.h1>
+          <motion.p
+            className="text-sgai-steel text-xl leading-relaxed max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Somos un grupo humano altamente especializado en abastecimiento —
+            no un BPO genérico. A eso sumamos una plataforma apoyada por IA,
+            centrada en hacer el procurement más inteligente y en mejorar los
+            procesos manuales que hoy viven en planillas, correos y llamadas.
+          </motion.p>
         </div>
       </section>
 
-      {/* 2. Foco de la empresa */}
-      <section className="bg-sgai-white py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
-            Nuestro foco
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-sgai-midnight mb-6 max-w-3xl leading-tight">
-            Abastecimiento inteligente para empresas que mueven Latinoamérica.
-          </h2>
-          <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-10">
-            Existimos porque las áreas de procurement en minería, energía y
-            construcción cargan procesos críticos con herramientas pensadas
-            para otros mercados o para otros tamaños. SGAI combina dos cosas
-            que antes iban por caminos separados:
-          </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-sgai-ice rounded-2xl p-8 border border-gray-200">
-              <Users className="w-10 h-10 text-sgai-copper mb-5" />
-              <h3 className="font-heading text-2xl text-sgai-midnight mb-3">
-                Servicio BPO
-              </h3>
-              <p className="text-sgai-steel leading-relaxed">
-                Ingenieros senior de procurement que se integran a tu operación
-                como extensión del equipo. Gestionan contratos, órdenes de
-                compra y licitaciones.
-              </p>
-            </div>
-            <div className="bg-sgai-ice rounded-2xl p-8 border border-gray-200">
-              <LayoutDashboard className="w-10 h-10 text-sgai-copper mb-5" />
-              <h3 className="font-heading text-2xl text-sgai-midnight mb-3">
-                Plataforma SGAI
-              </h3>
-              <p className="text-sgai-steel leading-relaxed">
-                Software con agentes de IA para revisión de BT, monitoreo de
-                contratos, análisis de propuestas y alertas de riesgo. Incluida
-                sin costo adicional con el BPO.
-              </p>
-            </div>
+      {/* 2. Quiénes somos */}
+      <section className="relative gradient-hero py-24 px-6 overflow-hidden">
+        <motion.div
+          className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-sgai-copper/10 blur-3xl pointer-events-none"
+          animate={{
+            x: [0, 40, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-24 -right-24 w-[420px] h-[420px] rounded-full bg-sgai-copper-light/10 blur-3xl pointer-events-none"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.12, 1],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+
+        <div className="relative max-w-6xl mx-auto">
+          <motion.p
+            className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+          >
+            Quiénes somos
+          </motion.p>
+          <motion.h2
+            className="font-heading text-4xl md:text-5xl text-white mb-6 max-w-3xl leading-tight"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Gente que vivió el problema,{" "}
+            <span className="gradient-copper-text">no que lo leyó.</span>
+          </motion.h2>
+          <motion.p
+            className="text-sgai-steel text-lg leading-relaxed mb-12 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Antes de contarte qué es SGAI, queremos que nos conozcas. Somos
+            tres socios con roles complementarios: estrategia comercial,
+            visión de producto y ejecución técnica.
+          </motion.p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {team.map((m, idx) => (
+              <motion.div
+                key={m.name}
+                className="group relative bg-sgai-slate/50 border border-white/10 rounded-2xl p-8 overflow-hidden hover:border-sgai-copper/50 transition-colors"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: 0.25 + idx * 0.12 }}
+                whileHover={{ y: -6 }}
+              >
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  aria-hidden="true"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 0%, rgba(200,117,51,0.18), transparent 60%)",
+                  }}
+                />
+                <div className="relative">
+                  <div className="relative w-20 h-20 mb-5">
+                    <motion.div
+                      className="absolute inset-0 rounded-full gradient-copper blur-lg opacity-60"
+                      animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
+                      transition={{
+                        duration: 3 + idx * 0.4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    <div className="relative w-20 h-20 rounded-full gradient-copper flex items-center justify-center shadow-[0_8px_30px_-8px_rgba(200,117,51,0.6)]">
+                      <span className="text-white font-heading text-2xl">
+                        {m.initials}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="font-heading text-xl text-white mb-1">
+                    {m.name}
+                  </h3>
+                  <p className="text-sgai-copper font-medium text-sm mb-4">
+                    {m.role}
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {m.bio}
+                  </p>
+                  <div className="mt-5 h-px bg-gradient-to-r from-sgai-copper/40 via-sgai-copper/10 to-transparent" />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Lo que nos diferencia */}
-      <section className="gradient-hero py-24 px-6">
+      {/* 3. ¿Qué es un BPO? */}
+      <section className="bg-sgai-white py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
-            Lo que nos diferencia
+            Punto de partida
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-white mb-6 max-w-3xl leading-tight">
-            La diferencia la hace cómo te acompañamos, no solo el software.
+          <h2 className="font-heading text-4xl md:text-5xl text-sgai-midnight mb-6 max-w-3xl leading-tight">
+            ¿Qué es un BPO? Y por qué el nuestro es distinto.
           </h2>
-          <p className="text-sgai-steel text-lg leading-relaxed mb-12 max-w-3xl">
-            Combinamos tecnología, servicio y contexto local. Cada uno por
-            separado existe en el mercado. La ventaja está en tenerlos
-            integrados, hablando entre sí, y operando con gente que entiende
-            faena.
+          <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-6">
+            BPO (<em>Business Process Outsourcing</em>) significa entregarle a
+            un tercero especializado la ejecución de un proceso completo. En
+            procurement se usa típicamente para tareas repetitivas como
+            órdenes de compra o conciliaciones.
+          </p>
+          <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-12">
+            El nuestro va un paso más allá: es un BPO de abastecimiento{" "}
+            <strong className="text-sgai-midnight">
+              operado por ingenieros senior y apoyado por una plataforma con
+              IA propia
+            </strong>
+            . No es un call-center de compras. Es un equipo experto asignado a
+            tu operación, con tecnología que automatiza lo repetitivo y libera
+            tiempo para las decisiones estratégicas.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Diff
-              icon="⚡"
-              title="Puesta en marcha en semanas, no en años"
-              body="El primer módulo activo en 6-10 semanas. Nada de proyectos de 18 meses donde el cliente paga implementación antes de ver resultado. Pagas cuando el agente ya está operando."
-            />
-            <Diff
-              icon="🧩"
-              title="BPO y plataforma integrados de fábrica"
-              body="Los ingenieros que ejecutan tu procurement son los mismos que entrenan los agentes de IA. Nadie más en el mercado combina ambos con este nivel de acoplamiento."
-            />
-            <Diff
-              icon="🇨🇱"
-              title="Equipo local con kilómetros en faena"
-              body="+12 años operando en la gran minería chilena. Hablamos el idioma de SAP Ariba, JDE, SAP S/4 y también del Excel que sigue gobernando un 60% del proceso real."
-            />
-            <Diff
-              icon="🎛️"
-              title="Modular: activas lo que necesitas"
-              body="¿Solo quieres revisión de Bases Técnicas? Se activa ese módulo. ¿Sumas monitoreo de contratos el siguiente trimestre? Se agrega. No cobramos por funciones que no usas."
-            />
-            <Diff
-              icon="🔌"
-              title="Se conecta a lo que ya tienes"
-              body="Ariba, JDE, SAP S/4, Buk, SharePoint o planillas compartidas. No te obligamos a migrar antes de empezar. La plataforma lee y escribe sobre tu stack actual."
-            />
-            <Diff
-              icon="📈"
-              title="ROI medible desde el primer trimestre"
-              body="Antes de firmar te entregamos un diagnóstico con números propios de tu operación: HH ahorradas, contratos por revisar, riesgo de desfinanciamiento. Si no cierra el caso, no cierra el contrato."
-            />
+          <div className="grid md:grid-cols-2 gap-5">
+            {bpoBreakdown.map((b) => {
+              const Icon = b.icon;
+              return (
+                <div
+                  key={b.title}
+                  className="bg-sgai-ice border border-gray-200 rounded-2xl p-6 flex gap-5 hover:border-sgai-copper/30 transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-lg gradient-copper flex items-center justify-center shrink-0">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg text-sgai-midnight mb-2">
+                      {b.title}
+                    </h3>
+                    <p className="text-sgai-steel text-sm leading-relaxed">
+                      {b.body}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="mt-12 bg-sgai-slate/50 border border-sgai-copper/20 rounded-2xl p-8 max-w-4xl">
-            <p className="text-sgai-copper text-xs font-bold uppercase tracking-wider mb-3">
-              En resumen
+          <div className="mt-10 bg-sgai-midnight rounded-2xl p-8 max-w-4xl">
+            <p className="text-sgai-copper text-xs font-bold uppercase tracking-widest mb-3">
+              La diferencia en una línea
             </p>
-            <p className="text-white text-xl md:text-2xl leading-relaxed font-heading">
-              Te damos servicio experto, tecnología propia y velocidad de
-              arranque — sin obligarte a rediseñar tu operación para que calce
-              con nuestro software.
+            <p className="text-white text-xl leading-relaxed font-heading">
+              Grupo humano altamente especializado, apoyado por IA — centrado
+              en abastecimiento inteligente y en mejorar los procesos
+              manuales. No un BPO genérico, no una plataforma rígida.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 4. 5 Módulos — ciclo completo de procurement */}
+      {/* 5. Los cinco módulos — detalle completo con IA */}
       <section className="bg-sgai-white py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
             La plataforma
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-sgai-midnight mb-6 max-w-3xl leading-tight">
-            Cinco módulos. 36 capacidades. Un solo ciclo.
+            Cinco módulos. Un ciclo continuo.{" "}
+            <span className="text-sgai-copper">La IA apoya al equipo.</span>
           </h2>
           <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-12">
-            Cada módulo cubre una etapa del proceso de abastecimiento, desde la
-            planificación previa hasta la auditoría post-firma. Puedes activarlos
-            todos o empezar por el que más te duele — la plataforma escala
-            contigo.
+            Cada módulo cubre una etapa del proceso de abastecimiento, desde
+            la planificación previa hasta la auditoría post-firma. No te
+            mostramos todo de una — puedes activar el que más te duele y
+            sumar el resto después.
           </p>
 
-          {/* Flujo del ciclo */}
-          <div className="hidden md:flex items-center justify-between mb-10 px-2">
-            {modules.map((m, i) => (
-              <div key={m.name} className="flex items-center">
-                <span className="text-xs font-bold uppercase tracking-wider text-sgai-steel">
-                  {String(i + 1).padStart(2, "0")} · {m.name}
-                </span>
-                {i < modules.length - 1 ? (
-                  <ArrowRight className="w-4 h-4 mx-3 text-sgai-copper/60" />
-                ) : null}
-              </div>
-            ))}
-          </div>
-
-          {/* Grid de 5 columnas con todas las features */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
             {modules.map((m, i) => {
               const Icon = m.icon;
@@ -401,7 +578,6 @@ export function DemoPitch() {
                   key={m.name}
                   className={`group relative rounded-2xl border ${m.border} ${m.bg} overflow-hidden flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all`}
                 >
-                  {/* Header */}
                   <div className={`bg-gradient-to-br ${m.color} p-6 text-white`}>
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">
@@ -417,24 +593,35 @@ export function DemoPitch() {
                     </p>
                   </div>
 
-                  {/* Body */}
                   <div className="p-5 flex-1 flex flex-col">
                     <p className="text-sgai-midnight/80 text-sm leading-relaxed mb-4">
                       {m.description}
                     </p>
-                    <div className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${m.accent}`}>
+                    <div
+                      className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${m.accent}`}
+                    >
                       Incluye
                     </div>
                     <ul className="space-y-1.5 mt-auto">
-                      {m.features.map((f) => (
-                        <li
-                          key={f}
-                          className="flex items-start gap-2 text-sm text-sgai-midnight/90"
-                        >
-                          <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${m.accent}`} />
-                          <span>{f}</span>
-                        </li>
-                      ))}
+                      {m.features.map((f) => {
+                        const hasAI = /\bIA\b/.test(f);
+                        return (
+                          <li
+                            key={f}
+                            className="flex items-start gap-2 text-sm text-sgai-midnight/90"
+                          >
+                            <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${m.accent}`} />
+                            <span className="flex-1">
+                              {f}
+                              {hasAI ? (
+                                <span className="ml-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-sm bg-sgai-copper/10 text-sgai-copper text-[10px] font-bold uppercase tracking-wider align-middle">
+                                  IA
+                                </span>
+                              ) : null}
+                            </span>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -442,66 +629,184 @@ export function DemoPitch() {
             })}
           </div>
 
-          {/* Cierre */}
-          <div className="mt-12 max-w-3xl bg-sgai-ice border border-gray-200 rounded-2xl p-8">
-            <p className="text-sgai-copper text-xs font-bold uppercase tracking-widest mb-3">
-              Cómo lo activas
-            </p>
-            <p className="text-sgai-midnight text-lg leading-relaxed mb-4">
-              No tienes que activar los 5 al mismo tiempo. La mayoría de
-              clientes empieza por <strong>Documentos &amp; Contratos</strong> o
-              <strong> Licitación</strong> (los que duelen más rápido) y suma
-              los demás en los siguientes trimestres.
-            </p>
-            <p className="text-sgai-steel text-sm">
-              Lo que SÍ recomendamos: que el primer módulo activo esté
-              integrado a tu sistema actual (Ariba, JDE, SharePoint o lo que
-              uses) desde el día uno. Eso evita la doble carga de datos.
-            </p>
+          <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-sgai-steel">
+            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-sm bg-sgai-copper/10 text-sgai-copper text-[10px] font-bold uppercase tracking-wider">
+              IA
+            </span>
+            <span>
+              = capacidad apoyada por IA propia (revisión, ranking,
+              recomendación, predicción).
+            </span>
           </div>
         </div>
       </section>
 
-      {/* 5. Equipo */}
-      <section className="gradient-hero py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
-            El equipo detrás
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-white mb-6 max-w-3xl leading-tight">
-            Gente que vivió el problema, no que lo leyó.
-          </h2>
-          <p className="text-sgai-steel text-lg leading-relaxed mb-12 max-w-2xl">
-            Tres socios con roles complementarios: estrategia comercial,
-            visión de producto y ejecución técnica.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {team.map((m) => (
-              <div
-                key={m.name}
-                className="bg-sgai-slate/50 border border-white/10 rounded-2xl p-8 hover:border-sgai-copper/30 transition-colors"
-              >
-                <div className="w-20 h-20 rounded-full gradient-copper flex items-center justify-center mb-5">
-                  <span className="text-white font-heading text-2xl">
-                    {m.initials}
+      {/* 6. Preguntas clave interactivas */}
+      <section className="relative gradient-hero py-24 px-6 overflow-hidden">
+        <motion.div
+          className="absolute top-10 left-10 w-80 h-80 rounded-full bg-sgai-copper/10 blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-20 w-72 h-72 rounded-full bg-sgai-copper-light/10 blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.25, 0.5, 0.25] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
+
+        <div className="relative max-w-6xl mx-auto">
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sgai-copper/10 border border-sgai-copper/30 mb-5"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-sgai-copper" />
+            <span className="text-sgai-copper text-xs font-bold uppercase tracking-widest">
+              Hagamos una pausa
+            </span>
+          </motion.div>
+
+          <motion.h2
+            className="font-heading text-4xl md:text-5xl text-white mb-6 max-w-3xl leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Preguntas clave para{" "}
+            <span className="gradient-copper-text">conocer tus dolores.</span>
+          </motion.h2>
+          <motion.p
+            className="text-sgai-steel text-lg leading-relaxed mb-4 max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            Estas son las preguntas que hacemos en cada conversación con
+            equipos de abastecimiento. <strong className="text-white">Piensa
+            tu respuesta primero.</strong> Cuando quieras, puedes abrir una
+            pista con patrones que hemos oído — no es la respuesta correcta,
+            solo algo para contrastar tu realidad.
+          </motion.p>
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sgai-midnight/50 border border-white/10 text-sgai-steel text-xs mb-14"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-sgai-copper" />
+            No abras la pista hasta haber pensado tu respuesta.
+          </motion.div>
+
+          <div className="space-y-16">
+            {discoveryGroups.map((group, gIdx) => (
+              <div key={group.label}>
+                <motion.div
+                  className="flex items-center gap-3 mb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider border ${group.iconBg}`}
+                  >
+                    {gIdx + 1} · {group.label}
                   </span>
+                </motion.div>
+                <motion.h3
+                  className="font-heading text-2xl md:text-3xl text-white mb-2"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.05 }}
+                >
+                  {group.title}
+                </motion.h3>
+                <motion.p
+                  className="text-sgai-steel leading-relaxed mb-8 max-w-3xl"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  {group.subtitle}
+                </motion.p>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  {group.questions.map((item, qIdx) => {
+                    const Icon = item.icon;
+                    const id = `${group.label}-${qIdx}`;
+                    const isOpen = openQuestion === id;
+                    return (
+                      <motion.button
+                        key={id}
+                        type="button"
+                        onClick={() =>
+                          setOpenQuestion(isOpen ? null : id)
+                        }
+                        className={`group text-left relative overflow-hidden rounded-2xl border transition-colors ${
+                          isOpen
+                            ? "bg-sgai-slate/80 border-sgai-copper/60"
+                            : "bg-sgai-slate/40 border-white/10 hover:border-sgai-copper/40"
+                        }`}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{
+                          duration: 0.45,
+                          delay: 0.1 + qIdx * 0.06,
+                        }}
+                        whileHover={{ y: -3 }}
+                      >
+                        <div className="p-5 flex items-start gap-4">
+                          <div
+                            className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border ${group.iconBg}`}
+                          >
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white font-medium leading-snug">
+                              {item.q}
+                            </p>
+                          </div>
+                        </div>
+                        <AnimatePresence initial={false}>
+                          {isOpen ? (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.25, ease: "easeOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-5 pb-5 pt-0">
+                                <div className="pl-[60px] relative">
+                                  <MessageCircle className="absolute left-3 top-0.5 w-4 h-4 text-sgai-copper/70" />
+                                  <p className="text-sgai-steel text-sm leading-relaxed border-l-2 border-sgai-copper/40 pl-4 italic">
+                                    {item.a}
+                                  </p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          ) : null}
+                        </AnimatePresence>
+                      </motion.button>
+                    );
+                  })}
                 </div>
-                <h3 className="font-heading text-xl text-white mb-1">
-                  {m.name}
-                </h3>
-                <p className="text-sgai-copper font-medium text-sm mb-4">
-                  {m.role}
-                </p>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {m.bio}
-                </p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* 6. Dolores comunes */}
+      {/* 7. Dolores comunes */}
       <section className="bg-sgai-white py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
@@ -542,163 +847,223 @@ export function DemoPitch() {
         </div>
       </section>
 
-      {/* 7. Formulario de feedback / ideas */}
-      <section id="feedback" className="gradient-hero py-24 px-6">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
-            Tu turno
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-white mb-6 leading-tight">
-            Ahora cuéntanos tú.
-          </h2>
-          <p className="text-sgai-steel text-lg leading-relaxed mb-10">
-            Nuestro roadmap lo construimos con clientes reales. Si tienes un
-            dolor específico o una idea de cómo la plataforma debería operar en
-            tu caso, escríbela aquí. Te respondemos en persona.
-          </p>
+      {/* 8. CTA final — sin formulario */}
+      <section
+        id="feedback"
+        className="relative gradient-hero py-28 px-6 overflow-hidden"
+      >
+        <motion.div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-sgai-copper/15 blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-sgai-copper-light/10 blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.55, 0.3] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
 
-          {submitted ? (
-            <div className="bg-sgai-slate/70 border border-sgai-success/30 rounded-2xl p-10 text-center">
-              <div className="w-14 h-14 rounded-full bg-sgai-success/20 flex items-center justify-center mx-auto mb-5">
-                <Check className="w-7 h-7 text-sgai-success" />
-              </div>
-              <h3 className="font-heading text-2xl text-white mb-2">
-                Recibido. Gracias.
-              </h3>
-              <p className="text-sgai-steel">
-                Nos pondremos en contacto en menos de 24 horas hábiles con una
-                propuesta concreta sobre lo que nos compartiste.
-              </p>
-            </div>
-          ) : (
-            <form
-              onSubmit={submit}
-              className="bg-sgai-slate/50 border border-white/10 rounded-2xl p-8 space-y-5"
+        <div className="relative max-w-5xl mx-auto">
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sgai-copper/15 border border-sgai-copper/40 mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <Sparkles className="w-4 h-4 text-sgai-copper" />
+            <span className="text-sgai-copper text-xs font-bold uppercase tracking-widest">
+              Pasemos a la acción
+            </span>
+          </motion.div>
+
+          <motion.h2
+            className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-[1.05] max-w-4xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            Diseñemos{" "}
+            <span className="gradient-copper-text">tu POC.</span>
+          </motion.h2>
+          <motion.p
+            className="text-sgai-steel text-xl leading-relaxed max-w-3xl mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Ya conversamos. Ahora el próximo paso es concreto: en 48 horas te
+            enviamos una propuesta de POC escrita — módulo, caso, métricas y
+            plazos. Antes de terminar, dos preguntas cortas nos terminan de
+            cerrar la foto para diseñarla bien.
+          </motion.p>
+
+          <div className="grid md:grid-cols-2 gap-5 mb-14">
+            {[
+              {
+                icon: AlertCircle,
+                q: "¿Hay algún dolor importante que no hayamos tocado?",
+                hint: "Casi siempre queda uno guardado. Ese suele ser el más útil para diseñar la POC.",
+              },
+              {
+                icon: Sparkles,
+                q: "¿Cuál sería para ustedes una mejora realmente valiosa?",
+                hint: "Pedimos imaginar, no priorizar. Si mañana funcionara algo perfecto, ¿qué sería?",
+              },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.q}
+                  className="relative bg-sgai-slate/60 border border-sgai-copper/30 rounded-2xl p-6 overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: 0.25 + idx * 0.12 }}
+                  whileHover={{ y: -4 }}
+                >
+                  <motion.div
+                    className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-sgai-copper/20 blur-3xl pointer-events-none"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{
+                      duration: 6 + idx,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <div className="relative flex items-start gap-4">
+                    <div className="w-11 h-11 rounded-xl gradient-copper flex items-center justify-center shrink-0 shadow-[0_6px_20px_-4px_rgba(200,117,51,0.6)]">
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white font-heading text-lg leading-tight mb-2">
+                        {item.q}
+                      </p>
+                      <p className="text-sgai-steel text-sm leading-relaxed italic">
+                        {item.hint}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <motion.p
+              className="text-white font-heading text-2xl md:text-3xl mb-8 max-w-2xl mx-auto leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">
-                    Empresa
-                  </label>
-                  <input
-                    name="company"
-                    required
-                    value={form.company}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                    placeholder="Ej: Minera El Roble"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">
-                    Tu rol
-                  </label>
-                  <input
-                    name="role"
-                    required
-                    value={form.role}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                    placeholder="Ej: Jefe de abastecimiento"
-                  />
-                </div>
-              </div>
+              Arranquemos la POC.{" "}
+              <span className="gradient-copper-text">
+                Propuesta escrita en 48h.
+              </span>
+            </motion.p>
 
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-white mb-1.5">
-                  <AlertTriangle className="w-4 h-4 text-sgai-copper" />
-                  ¿Cuál es hoy tu mayor dolor en abastecimiento?
-                </label>
-                <textarea
-                  name="painText"
-                  required
-                  value={form.painText}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                  placeholder="Ej: Tenemos 180 contratos activos y el ajuste a 42 horas nos cayó encima sin plan. O: Ariba no conversa con JDE y reconciliamos a mano cada mes."
-                />
-              </div>
-
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-white mb-1.5">
-                  <MessageSquare className="w-4 h-4 text-sgai-copper" />
-                  ¿Qué debería hacer SGAI que hoy no hace nadie?
-                </label>
-                <textarea
-                  name="idea"
-                  value={form.idea}
-                  onChange={handleChange}
-                  rows={3}
-                  className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                  placeholder="Opcional. Cualquier idea cuenta."
-                />
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4 pt-2 border-t border-white/10">
-                <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">
-                    Tu nombre
-                  </label>
-                  <input
-                    name="contactName"
-                    required
-                    value={form.contactName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                    placeholder="Nombre completo"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">
-                    Email corporativo
-                  </label>
-                  <input
-                    name="contactEmail"
-                    type="email"
-                    required
-                    value={form.contactEmail}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-sgai-midnight border border-white/10 text-white placeholder:text-sgai-steel focus:outline-none focus:ring-2 focus:ring-sgai-copper/40 focus:border-sgai-copper"
-                    placeholder="tu@empresa.cl"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-6 py-4 rounded-lg hover:opacity-90 transition-opacity text-lg"
+            <motion.div
+              className="relative inline-block mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+            >
+              <motion.div
+                className="absolute inset-0 rounded-2xl gradient-copper blur-2xl opacity-60"
+                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden="true"
+              />
+              <a
+                href="mailto:contacto.sgai@sgai.cl?subject=Vamos%20con%20la%20POC%20SGAI&body=Hola%20equipo%20SGAI%2C%0A%0ADesp%C3%A9s%20de%20la%20conversaci%C3%B3n%20queremos%20avanzar%20con%20la%20POC.%20El%20dolor%20prioritario%20que%20queremos%20abordar%20es%3A%0A%0A%0A%0ALa%20mejora%20realmente%20valiosa%20ser%C3%ADa%3A%0A%0A%0A%0AQuedo%20atento%20a%20su%20propuesta%20en%2048%20horas.%0A%0ASaludos."
+                onClick={() => trackEvent("demo_cta_arrancar_poc_click")}
+                className="relative inline-flex items-center justify-center gap-3 gradient-copper text-white font-heading text-xl md:text-2xl px-10 py-5 rounded-2xl hover:scale-105 transition-transform shadow-[0_15px_50px_-10px_rgba(200,117,51,0.7)]"
               >
-                Enviar
-                <Send className="w-5 h-5" />
-              </button>
+                Quiero mi propuesta de POC
+                <motion.span
+                  aria-hidden="true"
+                  animate={{ x: [0, 6, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  →
+                </motion.span>
+              </a>
+            </motion.div>
 
-              <p className="text-xs text-sgai-steel text-center">
-                Lo que compartas queda guardado solo para esta conversación. No
-                lo usamos para marketing masivo.
-              </p>
-            </form>
-          )}
+            <motion.div
+              className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sgai-steel text-sm"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+            >
+              <a
+                href="mailto:contacto.sgai@sgai.cl?subject=Dudas%20después%20del%20demo%20SGAI"
+                onClick={() => trackEvent("demo_cta_email_click")}
+                className="inline-flex items-center gap-2 hover:text-sgai-copper transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Tengo dudas antes de arrancar · contacto.sgai@sgai.cl
+              </a>
+              <span className="text-sgai-copper/50 hidden md:inline">·</span>
+              <Link
+                href="/contacto"
+                onClick={() => trackEvent("demo_cta_contacto_click")}
+                className="inline-flex items-center gap-2 hover:text-sgai-copper transition-colors"
+              >
+                Reagendar una sesión
+              </Link>
+            </motion.div>
+
+            <motion.div
+              className="mt-16 grid md:grid-cols-3 gap-4 max-w-4xl mx-auto text-left"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+            >
+              <div className="bg-sgai-slate/40 border border-white/10 rounded-xl p-5">
+                <div className="text-sgai-copper text-xs font-bold uppercase tracking-wider mb-2">
+                  48h · Propuesta
+                </div>
+                <p className="text-white font-heading text-lg mb-1">
+                  POC escrita
+                </p>
+                <p className="text-sgai-steel text-sm leading-relaxed">
+                  Módulo, caso, métricas y plazos. La revisas con tu equipo.
+                </p>
+              </div>
+              <div className="bg-sgai-slate/40 border border-white/10 rounded-xl p-5">
+                <div className="text-sgai-copper text-xs font-bold uppercase tracking-wider mb-2">
+                  Semana 1-2 · Kickoff
+                </div>
+                <p className="text-white font-heading text-lg mb-1">
+                  Alcance + data
+                </p>
+                <p className="text-sgai-steel text-sm leading-relaxed">
+                  Accesos, datos de prueba, criterios de éxito medibles.
+                </p>
+              </div>
+              <div className="bg-sgai-slate/40 border border-white/10 rounded-xl p-5">
+                <div className="text-sgai-copper text-xs font-bold uppercase tracking-wider mb-2">
+                  Semana 3-6 · Ejecución
+                </div>
+                <p className="text-white font-heading text-lg mb-1">
+                  Resultados sobre tu caso
+                </p>
+                <p className="text-sgai-steel text-sm leading-relaxed">
+                  Operamos en tu operación real. Revisamos resultados antes
+                  de hablar de contrato.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>
-  );
-}
-
-function Diff({
-  icon,
-  title,
-  body,
-}: {
-  icon?: string;
-  title: string;
-  body: string;
-}) {
-  return (
-    <div className="bg-sgai-slate/50 border border-white/10 rounded-xl p-6 hover:border-sgai-copper/40 transition-colors">
-      {icon ? <div className="text-3xl mb-3">{icon}</div> : null}
-      <h3 className="font-heading text-xl text-white mb-3">{title}</h3>
-      <p className="text-sgai-steel text-sm leading-relaxed">{body}</p>
-    </div>
   );
 }

@@ -42,11 +42,11 @@ export default function ContactoPage() {
                 </h2>
                 <div className="space-y-5">
                   <a
-                    href="mailto:contacto@sgai.cl"
+                    href="mailto:contacto.sgai@sgai.cl"
                     className="flex items-center gap-3 text-sgai-steel hover:text-sgai-copper transition-colors"
                   >
                     <Mail className="w-5 h-5 text-sgai-copper" />
-                    <span className="text-sm">contacto@sgai.cl</span>
+                    <span className="text-sm">contacto.sgai@sgai.cl</span>
                   </a>
                   <div className="flex items-center gap-3 text-sgai-steel">
                     <MapPin className="w-5 h-5 text-sgai-copper" />

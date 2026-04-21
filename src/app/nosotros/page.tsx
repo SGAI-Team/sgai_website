@@ -82,7 +82,7 @@ const professionalServiceSchema = {
   description:
     "Consultora chilena de abastecimiento inteligente. BPO de procurement + plataforma con IA para minería, energía y construcción.",
   priceRange: "$$$",
-  email: "contacto@sgai.cl",
+  email: "contacto.sgai@sgai.cl",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Santiago",

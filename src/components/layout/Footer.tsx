@@ -80,11 +80,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:contacto@sgai.cl"
+                  href="mailto:contacto.sgai@sgai.cl"
                   className="flex items-center gap-2 text-gray-400 text-sm hover:text-sgai-copper transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  contacto@sgai.cl
+                  contacto.sgai@sgai.cl
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">

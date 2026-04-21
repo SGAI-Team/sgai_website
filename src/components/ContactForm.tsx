@@ -71,7 +71,7 @@ export function ContactForm() {
       trackLead({ form: "contacto", industry: data.industry, interest: data.interest });
       setSubmitted(true);
     } catch {
-      alert("Error al enviar. Escríbenos a contacto@sgai.cl si el problema persiste.");
+      alert("Error al enviar. Escríbenos a contacto.sgai@sgai.cl si el problema persiste.");
     }
   }
 
