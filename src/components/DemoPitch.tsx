@@ -37,7 +37,7 @@ const bpoBreakdown = [
     icon: Users,
     title: "Equipo especializado asignado",
     body:
-      "Ingenieros senior de procurement con experiencia real en faena, no call-center. Se integran a tu equipo como una extensión del área.",
+      "Ingenieros senior de procurement con experiencia real en remoto, no call-center. Se integran a tu equipo como una extensión del área.",
   },
   {
     icon: ClipboardList,
@@ -49,7 +49,7 @@ const bpoBreakdown = [
     icon: Shield,
     title: "Responsabilidad contractual",
     body:
-      "El BPO asume SLA, KPI y calidad. Si algo falla, responde SGAI — no queda en el aire entre áreas internas.",
+      "El BPO asume SLA, KPI y calidad. Si algo falla, responde SGAI. No queda en el aire entre áreas internas.",
   },
   {
     icon: LayoutDashboard,
@@ -131,7 +131,7 @@ const modules = [
       "Publicación",
       "Recepción de ofertas",
       "Evaluación multicriterio",
-      "Simulación de escenarios",
+      "Simulación de escenarios IA",
       "Ranking IA panel de decisión",
       "Recomendación de adjudicación",
       "Transferencia administración",
@@ -376,7 +376,7 @@ export function DemoPitch() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Somos un grupo humano altamente especializado en abastecimiento —
+            Somos un grupo humano altamente especializado en abastecimiento,
             no un BPO genérico. A eso sumamos una plataforma apoyada por IA,
             centrada en hacer el procurement más inteligente y en mejorar los
             procesos manuales que hoy viven en planillas, correos y llamadas.
@@ -545,7 +545,7 @@ export function DemoPitch() {
               La diferencia en una línea
             </p>
             <p className="text-white text-xl leading-relaxed font-heading">
-              Grupo humano altamente especializado, apoyado por IA — centrado
+              Grupo humano altamente especializado, apoyado por IA, centrado
               en abastecimiento inteligente y en mejorar los procesos
               manuales. No un BPO genérico, no una plataforma rígida.
             </p>
@@ -553,7 +553,7 @@ export function DemoPitch() {
         </div>
       </section>
 
-      {/* 5. Los cinco módulos — detalle completo con IA */}
+      {/* 5. Los cinco módulos. Detalle completo con IA */}
       <section className="bg-sgai-white py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <p className="text-sgai-copper text-sm font-medium uppercase tracking-widest mb-4">
@@ -566,7 +566,7 @@ export function DemoPitch() {
           <p className="text-sgai-steel text-lg leading-relaxed max-w-3xl mb-12">
             Cada módulo cubre una etapa del proceso de abastecimiento, desde
             la planificación previa hasta la auditoría post-firma. No te
-            mostramos todo de una — puedes activar el que más te duele y
+            mostramos todo de una. Puedes activar el que más te duele y
             sumar el resto después.
           </p>
 
@@ -688,7 +688,7 @@ export function DemoPitch() {
             Estas son las preguntas que hacemos en cada conversación con
             equipos de abastecimiento. <strong className="text-white">Piensa
             tu respuesta primero.</strong> Cuando quieras, puedes abrir una
-            pista con patrones que hemos oído — no es la respuesta correcta,
+            pista con patrones que hemos oído. No es la respuesta correcta,
             solo algo para contrastar tu realidad.
           </motion.p>
           <motion.div
@@ -847,7 +847,7 @@ export function DemoPitch() {
         </div>
       </section>
 
-      {/* 8. CTA final — sin formulario */}
+      {/* 8. CTA final. Sin formulario */}
       <section
         id="feedback"
         className="relative gradient-hero py-28 px-6 overflow-hidden"
@@ -895,7 +895,7 @@ export function DemoPitch() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Ya conversamos. Ahora el próximo paso es concreto: en 48 horas te
-            enviamos una propuesta de POC escrita — módulo, caso, métricas y
+            enviamos una propuesta de POC escrita con módulo, caso, métricas y
             plazos. Antes de terminar, dos preguntas cortas nos terminan de
             cerrar la foto para diseñarla bien.
           </motion.p>
