@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="sgaiGrad" x1="0" y1="50" x2="100" y2="50" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#14B8A6"/>
-      <stop offset="0.5" stop-color="#3B82F6"/>
+      <stop offset="0.5" stop-color="#6366F1"/>
       <stop offset="1" stop-color="#8B5CF6"/>
     </linearGradient>
   </defs>

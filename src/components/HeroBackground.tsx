@@ -49,7 +49,7 @@ export function HeroBackground() {
           baseX: width * 0.2,
           baseY: height * 0.3,
           radius: Math.max(width, height) * 0.45,
-          color: [20, 184, 166],
+          color: [94, 234, 212],
           intensity: 0.55,
           speedX: 0.00025,
           speedY: 0.0003,
@@ -59,8 +59,8 @@ export function HeroBackground() {
           baseX: width * 0.8,
           baseY: height * 0.65,
           radius: Math.max(width, height) * 0.4,
-          color: [139, 92, 246],
-          intensity: 0.5,
+          color: [196, 181, 253],
+          intensity: 0.55,
           speedX: 0.0003,
           speedY: 0.00022,
           phase: Math.PI * 0.6,
@@ -69,8 +69,8 @@ export function HeroBackground() {
           baseX: width * 0.5,
           baseY: height * 0.5,
           radius: Math.max(width, height) * 0.35,
-          color: [59, 130, 246],
-          intensity: 0.32,
+          color: [147, 197, 253],
+          intensity: 0.35,
           speedX: 0.00035,
           speedY: 0.00028,
           phase: Math.PI,
@@ -79,8 +79,8 @@ export function HeroBackground() {
           baseX: width * 0.15,
           baseY: height * 0.85,
           radius: Math.max(width, height) * 0.3,
-          color: [99, 102, 241],
-          intensity: 0.22,
+          color: [199, 210, 254],
+          intensity: 0.3,
           speedX: 0.0004,
           speedY: 0.00033,
           phase: Math.PI * 1.4,
@@ -105,7 +105,7 @@ export function HeroBackground() {
     function drawGrid() {
       const spacingX = width / 16;
       const spacingY = height / 9;
-      ctx!.strokeStyle = "rgba(20, 184, 166, 0.07)";
+      ctx!.strokeStyle = "rgba(94, 234, 212, 0.08)";
       ctx!.lineWidth = 0.5;
       ctx!.beginPath();
       for (let i = 0; i <= 16; i++) {
@@ -152,9 +152,9 @@ export function HeroBackground() {
         pointer.y,
         280
       );
-      grd.addColorStop(0, "rgba(139, 92, 246, 0.24)");
-      grd.addColorStop(0.5, "rgba(20, 184, 166, 0.1)");
-      grd.addColorStop(1, "rgba(139, 92, 246, 0)");
+      grd.addColorStop(0, "rgba(196, 181, 253, 0.28)");
+      grd.addColorStop(0.5, "rgba(94, 234, 212, 0.12)");
+      grd.addColorStop(1, "rgba(196, 181, 253, 0)");
       ctx!.globalCompositeOperation = "screen";
       ctx!.fillStyle = grd;
       ctx!.fillRect(0, 0, width, height);
@@ -176,10 +176,10 @@ export function HeroBackground() {
 
         ctx!.beginPath();
         ctx!.arc(n.x, n.y, radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(94, 168, 220, ${alpha})`;
+        ctx!.fillStyle = `rgba(199, 210, 254, ${alpha})`;
         if (proximity > 0.1) {
           ctx!.shadowBlur = 12 * proximity;
-          ctx!.shadowColor = "rgba(139, 92, 246, 0.9)";
+          ctx!.shadowColor = "rgba(165, 180, 252, 0.9)";
         }
         ctx!.fill();
         ctx!.shadowBlur = 0;
@@ -189,9 +189,9 @@ export function HeroBackground() {
     function drawScanLine() {
       const y = (Math.sin(time * 0.4) * 0.5 + 0.5) * height;
       const grd = ctx!.createLinearGradient(0, y - 160, 0, y + 160);
-      grd.addColorStop(0, "rgba(20, 184, 166, 0)");
-      grd.addColorStop(0.5, "rgba(20, 184, 166, 0.12)");
-      grd.addColorStop(1, "rgba(20, 184, 166, 0)");
+      grd.addColorStop(0, "rgba(94, 234, 212, 0)");
+      grd.addColorStop(0.5, "rgba(94, 234, 212, 0.14)");
+      grd.addColorStop(1, "rgba(94, 234, 212, 0)");
       ctx!.fillStyle = grd;
       ctx!.fillRect(0, y - 160, width, 320);
     }

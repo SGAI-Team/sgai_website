@@ -21,7 +21,7 @@ const outfit = Outfit({
 const SITE_URL = "https://sgai.cl";
 
 export const viewport: Viewport = {
-  themeColor: "#1E1B4B",
+  themeColor: "#312E81",
 };
 
 export const metadata: Metadata = {

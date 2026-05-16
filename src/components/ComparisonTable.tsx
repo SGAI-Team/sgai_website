@@ -48,7 +48,7 @@ export function ComparisonTable() {
           </span>
         </div>
         <div className="text-center">
-          <span className="gradient-copper-text font-bold text-sm uppercase tracking-wider">
+          <span className="gradient-copper-text-dark font-bold text-sm uppercase tracking-wider">
             SGAI
           </span>
         </div>

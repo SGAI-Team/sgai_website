@@ -96,7 +96,7 @@ export function HeroSection() {
             <Link
               href="/contacto"
               onClick={() => trackCtaClick("hero", "Agenda una demo")}
-              className="group inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-8 py-4 rounded-lg hover:opacity-95 transition-all text-lg hover:shadow-[0_10px_40px_-10px_rgba(20,184,166,0.7)] hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-8 py-4 rounded-lg hover:opacity-95 transition-all text-lg hover:shadow-[0_10px_40px_-10px_rgba(13,148,136,0.5)] hover:-translate-y-0.5"
             >
               Agenda una demo
               <span
