@@ -196,13 +196,58 @@ table.data .num { font-family: 'JetBrains Mono', monospace; font-weight: 500; co
 .foot-meta { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-2); letter-spacing: 0.06em; line-height: 1.7; }
 
 @media print {
-  body { background: white; }
+  @page { size: A4 landscape; margin: 12mm 14mm; }
+
+  html, body { background: white; font-size: 11.5px; }
   body::before { display: none; }
-  .toc { display: none; }
-  .shell { grid-template-columns: 1fr; max-width: none; }
-  main { padding: 0 32px; }
-  .section, .diagram { page-break-inside: avoid; }
-  .cover { page-break-after: always; }
+  .toc { display: none !important; }
+  .shell { display: block; max-width: none; }
+  main { padding: 0; min-height: 0; }
+
+  /* Forzar colores (Edge/Chrome respeta print-color-adjust) */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+
+  /* Tipografía un poco más compacta */
+  .cover { padding: 0 0 24px 0; margin-bottom: 28px; page-break-after: always; }
+  .cover-header { margin-bottom: 32px; padding-bottom: 14px; }
+  .cover-title { font-size: 44px; margin-bottom: 18px; }
+  .cover-subtitle { font-size: 16px; margin-bottom: 28px; max-width: none; }
+  .cover-note { margin-top: 24px; padding: 14px 18px; font-size: 11.5px; }
+
+  .section { margin-bottom: 28px; page-break-inside: auto; }
+  .section-num { margin-bottom: 8px; padding-top: 8px; }
+  .section-title { font-size: 28px; margin-bottom: 8px; }
+  .section-deck { font-size: 14px; margin-bottom: 18px; max-width: none; }
+
+  h3.h-block { font-size: 18px; margin: 18px 0 8px 0; page-break-after: avoid; }
+  h4.h-sub { margin: 14px 0 6px 0; page-break-after: avoid; }
+  h5.h-tiny { font-size: 14px; margin: 10px 0 4px 0; page-break-after: avoid; }
+  p, p.lead, ul, ol { max-width: none; }
+  p.lead { font-size: 14px; margin-bottom: 14px; }
+
+  /* Evita cortes feos */
+  .diagram, .card, .callout, .internal-note, table.data,
+  .cover-grid, .grid-2 > *, .grid-3 > *, .grid-4 > * {
+    page-break-inside: avoid; break-inside: avoid;
+  }
+
+  /* SVG diagramas: encajar al ancho disponible */
+  .diagram { margin: 16px 0 18px 0; padding: 18px 16px 14px 16px; }
+  .diagram svg { width: 100% !important; height: auto !important; max-width: 100%; }
+
+  /* Cards y grids respiran menos en print */
+  .card { padding: 14px 16px; }
+  .grid-2, .grid-3, .grid-4 { gap: 12px; margin: 14px 0; }
+
+  /* Tablas no overflow */
+  table.data { font-size: 11px; }
+  table.data th, table.data td { padding: 8px 10px; }
+
+  /* Links sin underline ruidoso */
+  a { color: inherit; text-decoration: none; }
+
+  /* Footer al final */
+  .foot { margin-top: 28px; padding-top: 18px; page-break-inside: avoid; }
 }
 </style>
 </head>
