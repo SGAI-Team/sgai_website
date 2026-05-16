@@ -12,13 +12,13 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-dm-serif);
 
-  /* SGAI Custom Colors */
-  --color-sgai-midnight: #0A1628;
-  --color-sgai-copper: #C87533;
-  --color-sgai-copper-light: #E8A460;
-  --color-sgai-copper-glow: rgba(200, 117, 51, 0.15);
-  --color-sgai-slate: #1E293B;
-  --color-sgai-steel: #64748B;
+  /* SGAI Custom Colors — teal → violet brand */
+  --color-sgai-midnight: #1E1B4B;
+  --color-sgai-copper: #14B8A6;
+  --color-sgai-copper-light: #8B5CF6;
+  --color-sgai-copper-glow: rgba(20, 184, 166, 0.18);
+  --color-sgai-slate: #2A2766;
+  --color-sgai-steel: #7C84B5;
   --color-sgai-ice: #F1F5F9;
   --color-sgai-white: #FAFBFC;
   --color-sgai-success: #22C55E;
@@ -66,37 +66,37 @@
 
 :root {
   --background: #FAFBFC;
-  --foreground: #0A1628;
+  --foreground: #1E1B4B;
   --card: #FFFFFF;
-  --card-foreground: #0A1628;
+  --card-foreground: #1E1B4B;
   --popover: #FFFFFF;
-  --popover-foreground: #0A1628;
-  --primary: #C87533;
+  --popover-foreground: #1E1B4B;
+  --primary: #14B8A6;
   --primary-foreground: #FFFFFF;
   --secondary: #F1F5F9;
-  --secondary-foreground: #0A1628;
+  --secondary-foreground: #1E1B4B;
   --muted: #F1F5F9;
   --muted-foreground: #64748B;
-  --accent: #E8A460;
-  --accent-foreground: #0A1628;
+  --accent: #8B5CF6;
+  --accent-foreground: #FFFFFF;
   --destructive: #EF4444;
   --border: #E2E8F0;
   --input: #E2E8F0;
-  --ring: #C87533;
-  --chart-1: #C87533;
-  --chart-2: #E8A460;
-  --chart-3: #22C55E;
-  --chart-4: #3B82F6;
-  --chart-5: #64748B;
+  --ring: #14B8A6;
+  --chart-1: #14B8A6;
+  --chart-2: #8B5CF6;
+  --chart-3: #3B82F6;
+  --chart-4: #22C55E;
+  --chart-5: #7C84B5;
   --radius: 0.625rem;
   --sidebar: #FAFBFC;
-  --sidebar-foreground: #0A1628;
-  --sidebar-primary: #C87533;
+  --sidebar-foreground: #1E1B4B;
+  --sidebar-primary: #14B8A6;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #F1F5F9;
-  --sidebar-accent-foreground: #0A1628;
+  --sidebar-accent-foreground: #1E1B4B;
   --sidebar-border: #E2E8F0;
-  --sidebar-ring: #C87533;
+  --sidebar-ring: #14B8A6;
 }
 
 @layer base {
@@ -115,7 +115,7 @@
 @layer utilities {
   .gradient-hero {
     position: relative;
-    background: linear-gradient(135deg, #0A1628 0%, #162033 30%, #1a2540 50%, #162033 70%, #0A1628 100%);
+    background: linear-gradient(135deg, #1E1B4B 0%, #2A2766 30%, #312E81 50%, #2A2766 70%, #1E1B4B 100%);
     background-size: 200% 200%;
     animation: gradient-shift 18s ease infinite;
     overflow: hidden;
@@ -128,7 +128,7 @@
     left: -10%;
     width: 60%;
     height: 120%;
-    background: radial-gradient(circle, rgba(200, 117, 51, 0.22), transparent 65%);
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.28), transparent 65%);
     filter: blur(100px);
     animation: blob-drift-a 22s ease-in-out infinite;
     z-index: -1;
@@ -141,17 +141,17 @@
     right: -10%;
     width: 55%;
     height: 120%;
-    background: radial-gradient(circle, rgba(90, 140, 220, 0.18), transparent 65%);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.28), transparent 65%);
     filter: blur(100px);
     animation: blob-drift-b 28s ease-in-out infinite;
     z-index: -1;
     pointer-events: none;
   }
   .gradient-copper {
-    background: linear-gradient(135deg, #C87533 0%, #E8A460 100%);
+    background: linear-gradient(135deg, #14B8A6 0%, #3B82F6 50%, #8B5CF6 100%);
   }
   .gradient-copper-text {
-    background: linear-gradient(135deg, #C87533 0%, #E8A460 100%);
+    background: linear-gradient(135deg, #14B8A6 0%, #3B82F6 50%, #8B5CF6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -179,7 +179,7 @@
     left: -10%;
     width: 50%;
     height: 70%;
-    background: radial-gradient(circle, rgba(200, 117, 51, 0.28), transparent 70%);
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.22), transparent 70%);
     animation: blob-drift-a 18s ease-in-out infinite;
   }
   .section-light::after {
@@ -187,7 +187,7 @@
     right: -10%;
     width: 55%;
     height: 80%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.20), transparent 70%);
     animation: blob-drift-b 22s ease-in-out infinite;
   }
   @keyframes blob-drift-a {
@@ -211,7 +211,7 @@
     50% { background-position: 100% 50%; }
   }
   .gradient-hero-animated {
-    background: linear-gradient(135deg, #0A1628 0%, #162033 30%, #1a2540 50%, #162033 70%, #0A1628 100%);
+    background: linear-gradient(135deg, #1E1B4B 0%, #2A2766 30%, #312E81 50%, #2A2766 70%, #1E1B4B 100%);
     background-size: 200% 200%;
     animation: gradient-shift 20s ease infinite;
   }

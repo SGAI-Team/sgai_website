@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink, Mail, MapPin } from "lucide-react";
 
 const solutions = [
@@ -22,10 +23,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl">SGAI</span>
-              <span className="block text-sgai-steel text-xs mt-1">
-                Abastecimiento Inteligente
+            <Link href="/" className="inline-flex items-center gap-2.5">
+              <Image
+                src="/sgai-logomark.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
+              <span>
+                <span className="font-heading text-2xl block leading-none">SGAI</span>
+                <span className="block text-white/55 text-xs mt-1">
+                  Abastecimiento Inteligente
+                </span>
               </span>
             </Link>
             <p className="text-gray-400 text-sm mt-4 leading-relaxed max-w-xs">

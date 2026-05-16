@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -52,9 +53,17 @@ export function Navbar() {
       >
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="font-heading text-2xl text-white">SGAI</span>
-            <span className="hidden sm:block text-[11px] text-sgai-steel leading-tight">
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image
+              src="/sgai-logomark.svg"
+              alt=""
+              width={36}
+              height={36}
+              priority
+              className="w-9 h-9"
+            />
+            <span className="font-heading text-2xl text-white tracking-tight">SGAI</span>
+            <span className="hidden sm:block text-[11px] text-white/55 leading-tight border-l border-white/10 pl-2.5">
               abastecimiento
               <br />
               inteligente

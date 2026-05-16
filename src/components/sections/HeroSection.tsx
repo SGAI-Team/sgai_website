@@ -47,29 +47,43 @@ export function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-6 py-32">
         <div className="max-w-3xl">
+          {/* Eyebrow */}
+          <motion.div
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-sgai-copper animate-pulse" />
+            <span className="text-xs font-medium text-white/80 tracking-wide">
+              BPO + Plataforma IA · Minería, Energía e Industria
+            </span>
+          </motion.div>
+
           {/* Headline */}
           <motion.h1
-            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-6"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            Abastecimiento inteligente{" "}
+            Tu área de abastecimiento,{" "}
             <span className="gradient-copper-text">
-              para empresas que construyen Latinoamérica.
+              operando al ritmo de la IA.
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-gray-400 max-w-xl mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-white/75 max-w-2xl mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            BPO especializado + plataforma con IA. Gestionamos tus contratos y
-            órdenes de compra con equipos expertos y tecnología propia. Minería,
-            energía, construcción e industria.
+            Combinamos un <strong className="text-white">equipo BPO experto</strong> con una{" "}
+            <strong className="text-white">plataforma de IA propia</strong> para
+            ejecutar tu ciclo completo de compras —contratos, órdenes y licitaciones—
+            con más velocidad, control y trazabilidad. Validemos juntos cómo aplica a tu operación.
           </motion.p>
 
           {/* CTAs */}
@@ -81,10 +95,10 @@ export function HeroSection() {
           >
             <Link
               href="/contacto"
-              onClick={() => trackCtaClick("hero", "Solicita una demo")}
-              className="group inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-all text-lg hover:shadow-[0_10px_40px_-10px_rgba(200,117,51,0.7)] hover:-translate-y-0.5"
+              onClick={() => trackCtaClick("hero", "Agenda una demo")}
+              className="group inline-flex items-center justify-center gap-2 gradient-copper text-white font-semibold px-8 py-4 rounded-lg hover:opacity-95 transition-all text-lg hover:shadow-[0_10px_40px_-10px_rgba(20,184,166,0.7)] hover:-translate-y-0.5"
             >
-              Solicita una demo
+              Agenda una demo
               <span
                 aria-hidden="true"
                 className="transition-transform group-hover:translate-x-1"
@@ -95,7 +109,7 @@ export function HeroSection() {
             <Link
               href="/plataforma"
               onClick={() => trackCtaClick("hero", "Conoce la plataforma")}
-              className="inline-flex items-center justify-center gap-2 border border-white/20 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/5 hover:border-white/40 transition-all text-lg hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 border border-white/25 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/5 hover:border-white/45 transition-all text-lg hover:-translate-y-0.5"
             >
               Conoce la plataforma
             </Link>
@@ -103,12 +117,13 @@ export function HeroSection() {
 
           {/* Credibility line */}
           <motion.p
-            className="text-sgai-steel text-sm mt-8"
+            className="text-white/55 text-sm mt-8 max-w-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            Diseñado por profesionales con +12 años en abastecimiento directo.
+            Construido por profesionales con +12 años en abastecimiento minero,
+            energético e industrial en Chile y LatAm.
           </motion.p>
         </div>
       </div>
