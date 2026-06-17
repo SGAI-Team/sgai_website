@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const industries = [
@@ -137,7 +137,17 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA + Mobile burger */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <a
+              href="https://app.sgai.cl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Acceso para clientes y proveedores"
+              className="hidden lg:inline-flex items-center gap-2 border border-white/20 text-white/90 text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-white/5 hover:border-white/40 transition-colors"
+            >
+              <LogIn className="w-4 h-4" />
+              Acceso
+            </a>
             <Link
               href="/contacto"
               className="hidden lg:inline-flex items-center gap-2 gradient-copper text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
@@ -204,13 +214,23 @@ export function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.08 }}
+                className="flex flex-col items-center gap-4 mt-4"
               >
                 <Link
                   href="/contacto"
-                  className="gradient-copper text-white font-semibold px-8 py-3 rounded-lg inline-block mt-4"
+                  className="gradient-copper text-white font-semibold px-8 py-3 rounded-lg inline-block"
                 >
                   Solicita Demo &rarr;
                 </Link>
+                <a
+                  href="https://app.sgai.cl/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-white/20 text-white/90 font-semibold px-8 py-3 rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Acceso clientes y proveedores
+                </a>
               </motion.div>
             </div>
           </motion.div>
